@@ -1,3 +1,5 @@
-export default function Home() {
-  return <div></div>
+import { HomeView } from '@/src/views/home'
+
+export default function HomePage() {
+  return <HomeView />
 }
