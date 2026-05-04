@@ -1,10 +1,11 @@
+import { Logo } from '@shared/ui'
 import './footer.css'
 
 export const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer__wrapper">
-        <img src="/Logotype.svg" alt="SpeiL logo" />
+        <Logo />
 
         <div className="footer__social-links">
           <p>

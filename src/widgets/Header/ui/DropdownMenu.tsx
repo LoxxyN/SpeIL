@@ -1,29 +1,27 @@
-'use client'
-
 import { Dropdown } from '@heroui/react'
-import { useState } from 'react'
 import { IDropdownItems } from '../model/types'
 import { DropdownMenuItem } from './DropdownMenuItem'
 
-export const DropdownMenu = ({ items }: { items: IDropdownItems[] }) => {
-  const [setting, setSettings] = useState<Record<string, boolean>>({
-    theme: true,
-    lang: true,
-  })
+type TSettings = {
+  lang: boolean
+  theme: boolean
+}
 
+type TDropdownMenu = {
+  items: IDropdownItems[]
+  settings: TSettings
+  onChange: (key: 'theme' | 'lang', value: boolean) => void
+}
+
+export const DropdownMenu = ({ items, settings, onChange }: TDropdownMenu) => {
   return (
     <Dropdown.Menu>
       {items.map((item) => (
         <DropdownMenuItem
           key={item.id}
           item={item}
-          isSelected={setting[item.key]}
-          onChange={(value) => {
-            setSettings((prev) => ({
-              ...prev,
-              [item.key]: value,
-            }))
-          }}
+          isSelected={settings[item.key]}
+          onChange={(value) => onChange(item.key, value)}
         />
       ))}
     </Dropdown.Menu>

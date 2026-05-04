@@ -11,7 +11,7 @@ export const Navbar = () => {
       <ul className="flex gap-8">
         <li>
           <Link
-            className={`link text-2xl text-black opacity-40 ${pathname === '/' ? 'opacity-100' : ''}`}
+            className={`link text-2xl opacity-40 ${pathname === '/' ? 'opacity-100' : ''}`}
             href="/"
           >
             Главная
@@ -19,7 +19,7 @@ export const Navbar = () => {
         </li>
         <li>
           <Link
-            className={`link text-2xl text-black opacity-40 ${pathname === '/history' ? 'opacity-100' : ''}`}
+            className={`link text-2xl opacity-40 ${pathname === '/history' ? 'opacity-100' : ''}`}
             href="/history"
           >
             История

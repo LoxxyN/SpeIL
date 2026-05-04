@@ -6,17 +6,18 @@ import { IDropdownItems } from '../model/types'
 type TDropdownMenuItem = {
   item: IDropdownItems
   isSelected: boolean
-  onChange: () => void
+  onChange: (value: boolean) => void
 }
 
 export function DropdownMenuItem({ item, isSelected, onChange }: TDropdownMenuItem) {
   const customLabel =
-    item.key === 'theme' ? (isSelected ? 'Светлая' : 'Темая') : isSelected ? 'RU' : 'EN'
+    item.key === 'theme' ? (isSelected ? 'Темная' : 'Светлая') : isSelected ? 'EN' : 'RU'
+
   return (
     <Dropdown.Item
       shouldCloseOnSelect={false}
       textValue={item.label}
-      className="flex justify-between text-black"
+      className="flex justify-between"
     >
       <p>
         {item.label}: {customLabel}
