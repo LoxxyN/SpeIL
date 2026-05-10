@@ -1,7 +1,7 @@
 'use client'
 
 import { Dropdown, Switch } from '@heroui/react'
-import { IDropdownItems } from '../model/types'
+import { IDropdownItems } from '../../model/types'
 
 type TDropdownMenuItem = {
   item: IDropdownItems
@@ -9,7 +9,7 @@ type TDropdownMenuItem = {
   onChange: (value: boolean) => void
 }
 
-export function DropdownMenuItem({ item, isSelected, onChange }: TDropdownMenuItem) {
+export const DropdownMenuItem = ({ item, isSelected, onChange }: TDropdownMenuItem) => {
   const customLabel =
     item.key === 'theme' ? (isSelected ? 'Темная' : 'Светлая') : isSelected ? 'EN' : 'RU'
 

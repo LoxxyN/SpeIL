@@ -1,5 +1,5 @@
 import { Dropdown } from '@heroui/react'
-import { IDropdownItems } from '../model/types'
+import { IDropdownItems } from '../../model/types'
 import { DropdownMenuItem } from './DropdownMenuItem'
 
 type TSettings = {

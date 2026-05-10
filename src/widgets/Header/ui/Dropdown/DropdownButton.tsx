@@ -5,8 +5,8 @@ import { ChevronDown } from '@gravity-ui/icons'
 import { Button, Dropdown } from '@heroui/react'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
-import { DROPDOWN_ITEMS } from '../model/constants'
-import { DropdownMenu } from './DropdownMenu'
+import { DROPDOWN_ITEMS } from '../../model/constants'
+import { DropdownMenu } from './index'
 
 export const DropdownButton = observer(() => {
   const [settings, setSettings] = useState({

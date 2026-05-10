@@ -1,7 +1,7 @@
 import { Logo } from '@shared/ui'
-import { DropdownButton } from './DropdownButton'
+import { DropdownButton } from '../Dropdown'
+import { Navbar } from '../Navbar'
 import './header.css'
-import { Navbar } from './Navbar'
 
 export const Header = () => {
   return (

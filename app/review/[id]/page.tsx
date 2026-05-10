@@ -1,4 +1,4 @@
-import { ReviewDetailsView } from '@/src/views/review-details'
+import { ReviewDetailsView } from '@views/index'
 
 export default async function ReviewPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params

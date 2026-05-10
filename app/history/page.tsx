@@ -1,4 +1,4 @@
-import { HistoryView } from '@/src/views/history'
+import { HistoryView } from '@views/index'
 
 export default function HistoryPage() {
   return <HistoryView />
