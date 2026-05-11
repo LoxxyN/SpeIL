@@ -13,6 +13,6 @@ export const StoreProvider = ({ children, initialTheme }: ProviderProps) => {
   useEffect(() => {
     themeStore.hydrate(initialTheme)
     document.documentElement.dataset.theme = initialTheme
-  }, [])
+  }, [initialTheme])
   return <>{children}</>
 }

@@ -1,3 +1,8 @@
+.editor-container {
+  display: flex;
+  position: relative;
+}
+
 .rewiew-panel {
   display: flex;
   justify-content: space-between;

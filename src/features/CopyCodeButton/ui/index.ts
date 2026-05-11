@@ -1,2 +1,1 @@
-export { CodeEditor } from './CodeEditor'
 export { CopyCodeButton } from './CopyCodeButton'
