@@ -1,0 +1,19 @@
+.editor-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 28px;
+  position: relative;
+}
+
+.editor-panel__copy-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 10;
+}
+
+.editor-window {
+  position: relative;
+  z-index: 5;
+}

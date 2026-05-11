@@ -13,6 +13,8 @@
   --fs-24: 24px;
   --fs-32: 32px;
   --fs-36: 36px;
+
+  --page-width: 1440px;
 }
 
 :root,
@@ -102,6 +104,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+.wrapper {
+  width: calc(var(--page-width) - var(--page-width) / 10);
+  margin: 0 auto;
 }
 
 body {

@@ -1,1 +1,2 @@
-export { Logo } from './Logo/index'
+export { Logo } from './Logo'
+export { RatingCard } from './RatingCard'

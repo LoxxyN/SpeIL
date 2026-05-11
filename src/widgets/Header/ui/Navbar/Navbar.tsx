@@ -11,7 +11,7 @@ export const Navbar = () => {
     <nav className="header__nav">
       <ul className="flex gap-8">
         {NAV_LINKS.map((item) => (
-          <li>
+          <li key={item.id}>
             <Link
               className={`link text-2xl opacity-40 ${pathname === item.path ? 'opacity-100' : ''}`}
               href={item.path}
