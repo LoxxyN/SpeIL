@@ -6,13 +6,6 @@
   position: relative;
 }
 
-.editor-panel__copy-button {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  z-index: 10;
-}
-
 .editor-window {
   position: relative;
   z-index: 5;

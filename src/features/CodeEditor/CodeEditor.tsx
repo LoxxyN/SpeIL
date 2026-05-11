@@ -1,13 +1,26 @@
 'use client'
 
-import { Button } from '@heroui/react'
 import Editor, { OnMount } from '@monaco-editor/react'
+import { useDebounce } from '@shared/lib'
 import * as shikiMonaco from '@shikijs/monaco'
+import { useEffect, useState } from 'react'
 import './CodeEditor.css'
 
-export const CodeEditor = () => {
+type TCodeEditor = {
+  value: string
+  onChange: (value: string) => void
+  onValueChange: (value: string) => void
+}
+
+export const CodeEditor = ({ value, onChange, onValueChange }: TCodeEditor) => {
+  const [editorValue, setEditorValue] = useState(value)
+  const debouncedValue = useDebounce(editorValue, 1000)
+
+  useEffect(() => {
+    onChange(debouncedValue)
+  }, [debouncedValue, onChange])
+
   const handleEditorMount: OnMount = async (editor, monaco) => {
-    // tsx support
     monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
       jsx: monaco.languages.typescript.JsxEmit.ReactJSX,
       allowNonTsExtensions: true,
@@ -44,18 +57,18 @@ export const CodeEditor = () => {
       'file:///node_modules/@types/react/jsx-runtime.d.ts'
     )
 
-    // create tsx model
-    const model = monaco.editor.createModel(
-      `export const App = () => {
+    if (!editorValue) {
+      const model = monaco.editor.createModel(
+        `export const App = () => {
   return <div>Hello</div>
 }`,
-      'typescript',
-      monaco.Uri.parse('file:///main.tsx')
-    )
+        'typescript',
+        monaco.Uri.parse('file:///main.tsx')
+      )
 
-    editor.setModel(model)
+      editor.setModel(model)
+    }
 
-    // shiki
     const { createHighlighter } = await import('shiki')
 
     const highlighter = await createHighlighter({
@@ -68,16 +81,22 @@ export const CodeEditor = () => {
     }
   }
 
+  const handleEditorChange = (value: string | undefined) => {
+    if (value !== undefined) {
+      setEditorValue(value)
+      onValueChange(value)
+    }
+  }
+
   return (
     <div className="editor-panel">
-      <Button className="editor-panel__copy-button" variant="ghost">
-        Копировать код
-      </Button>
       <Editor
         className="editor-window"
         height="500px"
         theme="vs-dark"
         language="typescript"
+        value={editorValue}
+        onChange={handleEditorChange}
         onMount={handleEditorMount}
         options={{
           minimap: { enabled: false },

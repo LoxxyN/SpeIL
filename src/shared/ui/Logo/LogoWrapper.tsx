@@ -1,12 +1,14 @@
+import Image from 'next/image'
+
 type TThemeVariant = { themeVariant: 'light' | 'dark' }
 
 export const LogoWrapper = ({ themeVariant }: TThemeVariant) => {
   return (
     <>
       {themeVariant === 'light' ? (
-        <img src="/logotype.svg" alt="SpeiL logo" />
+        <Image src="/logotype.svg" alt="SpeiL logo" width={227} height={71} />
       ) : (
-        <img src="/logotype-light.svg" alt="SpeiL logo" />
+        <Image src="/logotype-light.svg" alt="SpeiL logo" width={227} height={71} />
       )}
     </>
   )
