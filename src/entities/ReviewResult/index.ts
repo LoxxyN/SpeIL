@@ -1,1 +1,2 @@
-export { ReviewResult } from './ReviewResult'
+export type { IReviewResult } from './model/types'
+export { ReviewResult } from './ui'

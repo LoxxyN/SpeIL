@@ -4,6 +4,7 @@ import { ReviewResult } from '@entities/index'
 import { ClearEditor, CodeEditor, CopyCodeButton } from '@features/index'
 import { Button } from '@heroui/react'
 import { useState } from 'react'
+import { REVIEW_DATA_EXAMPLE } from '../model'
 import './ReviewPanel.css'
 
 export const ReviewPanel = () => {
@@ -32,7 +33,7 @@ export const ReviewPanel = () => {
         </div>
       </div>
 
-      <ReviewResult />
+      <ReviewResult reviewData={REVIEW_DATA_EXAMPLE} />
     </section>
   )
 }

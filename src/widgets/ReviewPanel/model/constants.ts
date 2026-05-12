@@ -1,4 +1,4 @@
-import type { IReviewResult } from './types'
+import type { IReviewResult } from '@entities/ReviewResult'
 
 export const REVIEW_DATA_EXAMPLE: IReviewResult[] = [
   {
