@@ -1,7 +1,7 @@
 'use client'
 
 import { Dropdown, Switch } from '@heroui/react'
-import { IDropdownItems } from '../../model/types'
+import type { IDropdownItems } from '../../model/types'
 
 type TDropdownMenuItem = {
   item: IDropdownItems

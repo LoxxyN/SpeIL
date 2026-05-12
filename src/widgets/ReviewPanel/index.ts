@@ -1,1 +1,1 @@
-export { ReviewPanel } from './ReviewPanel'
+export { ReviewPanel } from './ui'

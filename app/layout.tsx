@@ -1,9 +1,9 @@
+import '@/app/globals.css'
+import { StoreProvider } from '@/app/providers'
 import { Footer, Header } from '@widgets/index'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { cookies } from 'next/headers'
-import './globals.css'
-import { StoreProvider } from './providers/StoreProvider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
