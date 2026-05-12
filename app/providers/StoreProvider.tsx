@@ -1,7 +1,7 @@
 'use client'
 
+import { themeStore } from '@/app/store'
 import { useEffect } from 'react'
-import { themeStore } from '../store'
 
 type Theme = 'dark' | 'light'
 type ProviderProps = {

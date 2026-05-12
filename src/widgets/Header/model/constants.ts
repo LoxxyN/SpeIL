@@ -1,4 +1,4 @@
-import { IDropdownItems, INavLinks } from './types'
+import type { IDropdownItems, INavLinks } from './types'
 
 export const DROPDOWN_ITEMS: IDropdownItems[] = [
   {
