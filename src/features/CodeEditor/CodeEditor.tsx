@@ -1,24 +1,18 @@
-'use client'
-
-import Editor, { OnMount } from '@monaco-editor/react'
-import { useDebounce } from '@shared/lib'
+import Editor, { type OnMount } from '@monaco-editor/react'
 import * as shikiMonaco from '@shikijs/monaco'
-import { useEffect, useState } from 'react'
 import './CodeEditor.css'
 
 type TCodeEditor = {
   value: string
-  onChange: (value: string) => void
   onValueChange: (value: string) => void
 }
 
-export const CodeEditor = ({ value, onChange, onValueChange }: TCodeEditor) => {
-  const [editorValue, setEditorValue] = useState(value)
-  const debouncedValue = useDebounce(editorValue, 1000)
-
-  useEffect(() => {
-    onChange(debouncedValue)
-  }, [debouncedValue, onChange])
+export const CodeEditor = ({ value, onValueChange }: TCodeEditor) => {
+  const handleEditorChange = (value: string | undefined) => {
+    if (value !== undefined) {
+      onValueChange(value)
+    }
+  }
 
   const handleEditorMount: OnMount = async (editor, monaco) => {
     monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
@@ -57,18 +51,6 @@ export const CodeEditor = ({ value, onChange, onValueChange }: TCodeEditor) => {
       'file:///node_modules/@types/react/jsx-runtime.d.ts'
     )
 
-    if (!editorValue) {
-      const model = monaco.editor.createModel(
-        `export const App = () => {
-  return <div>Hello</div>
-}`,
-        'typescript',
-        monaco.Uri.parse('file:///main.tsx')
-      )
-
-      editor.setModel(model)
-    }
-
     const { createHighlighter } = await import('shiki')
 
     const highlighter = await createHighlighter({
@@ -81,13 +63,6 @@ export const CodeEditor = ({ value, onChange, onValueChange }: TCodeEditor) => {
     }
   }
 
-  const handleEditorChange = (value: string | undefined) => {
-    if (value !== undefined) {
-      setEditorValue(value)
-      onValueChange(value)
-    }
-  }
-
   return (
     <div className="editor-panel">
       <Editor
@@ -95,7 +70,7 @@ export const CodeEditor = ({ value, onChange, onValueChange }: TCodeEditor) => {
         height="500px"
         theme="vs-dark"
         language="typescript"
-        value={editorValue}
+        value={value}
         onChange={handleEditorChange}
         onMount={handleEditorMount}
         options={{
