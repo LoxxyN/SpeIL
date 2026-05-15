@@ -3,7 +3,7 @@ import type { IRatingCard, TRatingChipLabel, TRatingChipType } from './rating-ca
 
 const ratingChipLabelMap: Record<TRatingChipType, TRatingChipLabel> = {
   danger: 'Bad',
-  warning: 'Medium',
+  warning: 'Suggestion',
   default: 'NIT',
 }
 
