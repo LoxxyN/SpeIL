@@ -1,7 +1,5 @@
-import type { TRatingChipType } from '@shared/ui/RatingCard'
+import type { IRatingCard } from '@shared/ui/RatingCard/types'
 
-export interface IReviewResult {
-  id: number
-  reviewType: TRatingChipType
-  reviewText: string
+export interface IReviewResponse {
+  review: IRatingCard[]
 }

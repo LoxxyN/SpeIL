@@ -1,16 +1,16 @@
 'use client'
 
 import { ReviewResult } from '@entities/index'
-import { ClearEditor, CodeEditor, CopyCodeButton } from '@features/index'
-import { Button } from '@heroui/react'
+import { ClearEditor, CodeEditor, CopyCodeButton, GetReviewButton } from '@features/index'
 import { useState } from 'react'
-import { REVIEW_DATA_EXAMPLE } from '../model'
+import { postReview } from '../api'
 import './ReviewPanel.css'
 
 export const ReviewPanel = () => {
   const [code, setCode] = useState(`export const App = () => {
   return <div>Hello</div>
 }`)
+  const [reviewData, setReviewData] = useState(null)
 
   const onValueChange = (value: string) => {
     setCode(value)
@@ -18,6 +18,17 @@ export const ReviewPanel = () => {
 
   const handleClearEditor = () => {
     setCode('')
+  }
+
+  const handleGetReview = async () => {
+    if (code === '' || typeof code === 'undefined' || code === null) {
+      console.error('Код не был передан')
+    } else {
+      await postReview(code).then((data) => {
+        const REVIEW_DATA = data
+        setReviewData(REVIEW_DATA)
+      })
+    }
   }
 
   return (
@@ -29,11 +40,11 @@ export const ReviewPanel = () => {
         </div>
         <div className="editor-action-buttons flex justify-evenly">
           <ClearEditor handleClear={handleClearEditor} />
-          <Button size="lg">Получить ревью</Button>
+          <GetReviewButton handleGetReview={handleGetReview} />
         </div>
       </div>
 
-      <ReviewResult reviewData={REVIEW_DATA_EXAMPLE} />
+      <ReviewResult reviewDataMap={reviewData} />
     </section>
   )
 }

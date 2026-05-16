@@ -1,0 +1,11 @@
+'use client'
+
+import { Button } from '@heroui/react'
+
+export const GetReviewButton = ({ handleGetReview }: { handleGetReview: () => void }) => {
+  return (
+    <Button onClick={handleGetReview} size="lg">
+      Получить ревью
+    </Button>
+  )
+}

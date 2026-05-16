@@ -1,1 +1,1 @@
-export type { IReviewResult } from './types'
+export type * from './types'
