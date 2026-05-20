@@ -1,4 +1,4 @@
-import type { IReviewData } from '@entities/ReviewResult/model'
+import type { IReviewData } from '@shared/types'
 
 export const REVIEW_DATA_EXAMPLE: IReviewData = {
   review: [

@@ -1,8 +1,8 @@
-import type { IReviewData, IReviewHistoryItem } from '@entities/ReviewResult/model'
+import type { IReviewData } from '@shared/types'
 import { action, makeAutoObservable } from 'mobx'
 import { postReview } from '../api'
+import type { IReviewHistoryItem, TReviewHistory } from './types'
 
-type TReviewHistory = IReviewHistoryItem[]
 const STORAGE_KEY = 'reviews_history'
 const codeTemplate = `export function Hello() {
   return (<h1>Hello World!</h1>)

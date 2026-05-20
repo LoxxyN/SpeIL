@@ -1,5 +1,5 @@
-import type { IReviewData } from '@/src/entities/ReviewResult/model'
 import { parseNestedJSON } from '@shared/lib'
+import type { IReviewData } from '@shared/types'
 
 export const postReview = async (code: string): Promise<IReviewData> => {
   try {

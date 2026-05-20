@@ -1,8 +1,8 @@
 import { ScrollShadow } from '@heroui/react'
+import type { TReviewData } from '@shared/types'
 import { RatingCard } from '@shared/ui'
 import { observer } from 'mobx-react-lite'
 import { memo } from 'react'
-import type { TReviewData } from '../../model'
 import { ReviewResultEmpty } from '../ReviewResultEmpty'
 import './ReviewResult.css'
 
