@@ -1,11 +1,13 @@
 {
   "name": "speil",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "linting:check": "npm run format:check && npm run lint",
+    "linting:fix": "npm run format && npm run lint:fix",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
