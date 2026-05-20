@@ -1,58 +1,30 @@
-import type { IReviewResult } from '@entities/ReviewResult'
+import type { IReviewData } from '@shared/types'
 
-export const REVIEW_DATA_EXAMPLE: IReviewResult[] = [
-  {
-    id: 1,
-    reviewType: 'danger',
-    reviewText:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem. @Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem.',
-  },
-  {
-    id: 2,
-    reviewType: 'warning',
-    reviewText:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem.',
-  },
-  {
-    id: 3,
-    reviewType: 'warning',
-    reviewText:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem.',
-  },
-  {
-    id: 4,
-    reviewType: 'default',
-    reviewText:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem.',
-  },
-  {
-    id: 5,
-    reviewType: 'danger',
-    reviewText:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem.',
-  },
-  {
-    id: 6,
-    reviewType: 'warning',
-    reviewText:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem.',
-  },
-  {
-    id: 7,
-    reviewType: 'default',
-    reviewText:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem.',
-  },
-  {
-    id: 8,
-    reviewType: 'danger',
-    reviewText:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem.',
-  },
-  {
-    id: 9,
-    reviewType: 'warning',
-    reviewText:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo rem, explicabo voluptas nobis adipisci dolorem.',
-  },
-]
+export const REVIEW_DATA_EXAMPLE: IReviewData = {
+  review: [
+    {
+      id: 1,
+      reviewType: 'default',
+      description:
+        'Экспорт компонента Hello выполнен корректно, однако рекомендуется добавить типизацию (если используется TypeScript) и PropTypes для улучшения поддержки и документирования пропсов в будущем.',
+    },
+    {
+      id: 2,
+      reviewType: 'warning',
+      description:
+        "Обеспечение защиты от prompt injection для LLM требует многоуровневого подхода. Во-первых, никогда не доверяйте вводу пользователя: используйте системные промпты для строгого ограничения ролей модели. Во-вторых, внедрите 'delimiter separation' (разделители), чтобы отделить системные инструкции от пользовательского ввода. В-третьих, обязательно используйте Content Security Policy (CSP) и валидацию на стороне сервера, чтобы предотвратить выполнение вредоносного контента, который модель может вернуть в ответе (XSS).",
+    },
+    {
+      id: 3,
+      reviewType: 'danger',
+      description:
+        'Критически важно реализовать фильтрацию выходных данных (Output Filtering). Даже если вы защитили промпт, модель может вернуть код или скрипты, которые при отрисовке в браузере (например, через dangerouslySetInnerHTML в React) приведут к XSS. Всегда экранируйте вывод модели перед отображением в UI.',
+    },
+    {
+      id: 4,
+      reviewType: 'warning',
+      description:
+        'Рассмотрите возможность использования специализированных инструментов для мониторинга и безопасности промптов, таких как LlamaGuard или аналогичные API для детекции попыток инъекций, так как простые эвристики на основе черных списков слов легко обходятся современными методами состязательных атак.',
+    },
+  ],
+}

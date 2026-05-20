@@ -54,7 +54,7 @@ export const CodeEditor = ({ value, onValueChange }: TCodeEditor) => {
     const { createHighlighter } = await import('shiki')
 
     const highlighter = await createHighlighter({
-      themes: ['dark-plus'],
+      themes: ['dark-plus', 'light-plus'],
       langs: ['javascript', 'typescript', 'tsx', 'jsx'],
     })
 
@@ -68,7 +68,7 @@ export const CodeEditor = ({ value, onValueChange }: TCodeEditor) => {
       <Editor
         className="editor-window"
         height="500px"
-        theme="vs-dark"
+        theme="dark-plus"
         language="typescript"
         value={value}
         onChange={handleEditorChange}
