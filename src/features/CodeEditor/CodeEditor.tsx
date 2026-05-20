@@ -1,5 +1,7 @@
+import { themeStore } from '@app/store'
 import Editor, { type OnMount } from '@monaco-editor/react'
 import * as shikiMonaco from '@shikijs/monaco'
+import { observer } from 'mobx-react-lite'
 import './CodeEditor.css'
 
 type TCodeEditor = {
@@ -7,7 +9,9 @@ type TCodeEditor = {
   onValueChange: (value: string) => void
 }
 
-export const CodeEditor = ({ value, onValueChange }: TCodeEditor) => {
+export const CodeEditor = observer(({ value, onValueChange }: TCodeEditor) => {
+  const { theme } = themeStore
+
   const handleEditorChange = (value: string | undefined) => {
     if (value !== undefined) {
       onValueChange(value)
@@ -54,7 +58,7 @@ export const CodeEditor = ({ value, onValueChange }: TCodeEditor) => {
     const { createHighlighter } = await import('shiki')
 
     const highlighter = await createHighlighter({
-      themes: ['dark-plus', 'light-plus'],
+      themes: theme === 'dark' ? ['dark-plus', 'light-plus'] : ['light-plus', 'dark-plus'],
       langs: ['javascript', 'typescript', 'tsx', 'jsx'],
     })
 
@@ -68,7 +72,7 @@ export const CodeEditor = ({ value, onValueChange }: TCodeEditor) => {
       <Editor
         className="editor-window"
         height="500px"
-        theme="dark-plus"
+        theme={theme === 'dark' ? 'dark-plus' : 'light-plus'}
         language="typescript"
         value={value}
         onChange={handleEditorChange}
@@ -88,4 +92,4 @@ export const CodeEditor = ({ value, onValueChange }: TCodeEditor) => {
       />
     </div>
   )
-}
+})

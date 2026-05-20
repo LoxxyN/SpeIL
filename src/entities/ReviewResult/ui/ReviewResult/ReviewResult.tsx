@@ -1,3 +1,5 @@
+'use client'
+
 import { ScrollShadow } from '@heroui/react'
 import type { TReviewData } from '@shared/types'
 import { RatingCard } from '@shared/ui'
