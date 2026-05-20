@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     })
 
     return NextResponse.json({
-      data: { review: response.text },
+      data: response.text,
     })
   } catch (error) {
     console.error('Error:', error)

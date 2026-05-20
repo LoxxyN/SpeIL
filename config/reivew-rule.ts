@@ -56,13 +56,12 @@ Always respond on Russian
 Answer template: 
 
 type ReviewType = 'danger' (Bad) | 'warning' (Suggestion) | 'default' (Nit)
-  [
+
     {
       "id": number,
       "reviewType": ReviewType
       "description": string
     },
-  ]
 
 Do not consider tabs in comparison with spaces or other purely cosmetic options as the focus of the review, this does not impair readability.
 `
