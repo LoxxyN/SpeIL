@@ -2,6 +2,7 @@
 
 import { ReviewResult } from '@entities/index'
 import { CodeEditor, CopyCodeButton } from '@features/index'
+import { toast } from '@heroui/react'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { reviewStore } from '../../model/reviewStore'
@@ -9,11 +10,29 @@ import { EditorActionButtons } from '../EditorActionButtons'
 import './ReviewPanel.css'
 
 export const ReviewPanel = observer(() => {
-  const { postReviewAction, setCode, clearEditor, code, lastReview, loadStorage } = reviewStore
+  const { postReviewAction, setCode, clearEditor, code, isLoading, lastReview } = reviewStore
 
   useEffect(() => {
-    loadStorage()
-  }, [loadStorage])
+    reviewStore.loadStorage()
+  }, [])
+
+  const callDangerToast = () => {
+    if (!document.hidden) {
+      toast.danger('Что то пошло не так', { description: 'Повторите попытку' })
+    } else {
+      const onVisibilityChange = () => {
+        if (!document.hidden) {
+          toast.danger('Что то пошло не так', { description: 'Повторите попытку' })
+          document.removeEventListener('visibilitychange', onVisibilityChange)
+        }
+      }
+      document.addEventListener('visibilitychange', onVisibilityChange)
+    }
+  }
+
+  const getReview = () => {
+    postReviewAction(code).catch((error) => error && callDangerToast())
+  }
 
   return (
     <section className="review-panel">
@@ -23,12 +42,12 @@ export const ReviewPanel = observer(() => {
           <CopyCodeButton code={code} />
         </div>
         <EditorActionButtons
+          isLoading={isLoading}
           handleClear={clearEditor}
-          handleGetReview={() => postReviewAction(code)}
+          handleGetReview={getReview}
         />
       </div>
-
-      <ReviewResult review={lastReview} />
+      <ReviewResult review={lastReview} isLoading={isLoading} />
     </section>
   )
 })

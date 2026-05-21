@@ -9,6 +9,10 @@ export const postReview = async (code: string): Promise<IReviewData> => {
       body: JSON.stringify({ code: code }),
     })
 
+    if (!res.ok) {
+      throw new Error(`Response status: ${res.status}`)
+    }
+
     const { data } = await res.json()
     const reviewData = parseNestedJSON(data)
 
