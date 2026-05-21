@@ -10,12 +10,11 @@ import { EditorActionButtons } from '../EditorActionButtons'
 import './ReviewPanel.css'
 
 export const ReviewPanel = observer(() => {
-  const { postReviewAction, setCode, clearEditor, code, isLoading, lastReview, loadStorage } =
-    reviewStore
+  const { postReviewAction, setCode, clearEditor, code, isLoading, lastReview } = reviewStore
 
   useEffect(() => {
-    loadStorage()
-  }, [loadStorage])
+    reviewStore.loadStorage()
+  }, [])
 
   const callDangerToast = () => {
     if (!document.hidden) {

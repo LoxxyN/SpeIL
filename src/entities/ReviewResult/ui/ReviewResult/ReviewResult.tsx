@@ -15,7 +15,7 @@ const ReviewResult = observer(({ review, isLoading }: TReviewResult) => {
 
   return (
     <div className="review-result">
-      <h2>Результаты ревью</h2>
+      <h2>Результаты последнего ревью</h2>
       {isLoading ? (
         <Spinner color="current" size="xl" />
       ) : (
