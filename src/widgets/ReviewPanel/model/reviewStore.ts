@@ -12,6 +12,7 @@ class ReviewStore {
   isLoading: boolean = false
   reviewDataHistory: TReviewHistory = []
   code: string = codeTemplate
+  reviewCode: string = ''
 
   constructor() {
     makeAutoObservable(this)
@@ -47,6 +48,7 @@ class ReviewStore {
       this.isLoading = true
       const newReview = await postReview(code)
 
+      this.reviewCode = code
       this.addReviewToHistory(newReview)
     } catch (error) {
       throw new Error(`postReviewAction error: ${error}`)
@@ -57,6 +59,7 @@ class ReviewStore {
 
   addReviewToHistory = (newReviewData: IReviewData) => {
     const newReview: IReviewHistoryItem = {
+      code: this.reviewCode,
       review: newReviewData.review,
       reviewId: crypto.randomUUID(),
       createdAt: Date.now(),

@@ -1,5 +1,6 @@
 import '@/app/globals.css'
 import { StoreProvider } from '@/app/providers'
+import { Toast } from '@heroui/react'
 import { Footer, Header } from '@widgets/index'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
@@ -36,6 +37,7 @@ export default async function RootLayout({
       data-theme={initialTheme}
     >
       <StoreProvider initialTheme={initialTheme}>
+        <Toast.Provider placement="top" />
         <body className="flex min-h-full flex-col justify-between">
           <Header />
           <main>{children}</main>
