@@ -1,0 +1,31 @@
+.review-card {
+  display: flex;
+  gap: 24px;
+}
+
+.review-card__code-wrapper {
+  width: 40%;
+  height: 250px;
+}
+
+.review-card__content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.review-card__description {
+  padding-left: 24px;
+}
+
+.review-card__header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+
+  .review-card__header-title {
+    font-weight: 500;
+    font-size: var(--fs-32);
+  }
+}
