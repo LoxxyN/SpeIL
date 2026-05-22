@@ -1,3 +1,5 @@
+'use client'
+
 import { copyToClipboard } from '@shared/lib'
 import { useState } from 'react'
 
