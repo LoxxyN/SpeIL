@@ -1,11 +1,9 @@
-import { HistoryList } from '@widgets/HistoryList'
+import { ReviewHistoryList } from '@widgets/index'
 
 export const HistoryView = () => {
   return (
     <div className="wrapper">
-      <h2>HistoryView</h2>
-
-      <HistoryList />
+      <ReviewHistoryList />
     </div>
   )
 }

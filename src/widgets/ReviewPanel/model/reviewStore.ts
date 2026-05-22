@@ -1,7 +1,6 @@
-import type { IReviewData } from '@shared/types'
-import { action, makeAutoObservable } from 'mobx'
+import type { IReviewData, IReviewHistoryItem, TReviewHistory } from '@shared/types'
+import { action, makeAutoObservable, runInAction } from 'mobx'
 import { postReview } from '../api'
-import type { IReviewHistoryItem, TReviewHistory } from './types'
 
 const STORAGE_KEY = 'reviews_history'
 const codeTemplate = `export function Hello() {
@@ -53,7 +52,7 @@ class ReviewStore {
     } catch (error) {
       throw new Error(`postReviewAction error: ${error}`)
     } finally {
-      this.isLoading = false
+      runInAction(() => (this.isLoading = false))
     }
   })
 
