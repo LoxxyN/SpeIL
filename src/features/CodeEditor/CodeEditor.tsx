@@ -1,3 +1,5 @@
+'use client'
+
 import { themeStore } from '@app/store'
 import Editor, { type OnMount } from '@monaco-editor/react'
 import * as shikiMonaco from '@shikijs/monaco'
@@ -6,15 +8,18 @@ import './CodeEditor.css'
 
 type TCodeEditor = {
   value: string
-  onValueChange: (value: string) => void
+  onValueChange?: (value: string) => void
+  isReadonly?: boolean
 }
 
-export const CodeEditor = observer(({ value, onValueChange }: TCodeEditor) => {
+export const CodeEditor = observer(({ value, onValueChange, isReadonly }: TCodeEditor) => {
   const { theme } = themeStore
 
   const handleEditorChange = (value: string | undefined) => {
     if (value !== undefined) {
-      onValueChange(value)
+      if (onValueChange) {
+        onValueChange(value)
+      }
     }
   }
 
@@ -78,15 +83,16 @@ export const CodeEditor = observer(({ value, onValueChange }: TCodeEditor) => {
         onChange={handleEditorChange}
         onMount={handleEditorMount}
         options={{
+          readOnly: isReadonly,
           minimap: { enabled: false },
           glyphMargin: false,
           folding: false,
-          fontSize: 20,
+          fontSize: 18,
           lineNumbersMinChars: 3,
           renderLineHighlight: 'none',
           scrollbar: {
-            verticalScrollbarSize: 8,
-            horizontalScrollbarSize: 8,
+            verticalScrollbarSize: 4,
+            horizontalScrollbarSize: 4,
           },
         }}
       />

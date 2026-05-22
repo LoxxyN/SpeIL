@@ -1,2 +1,1 @@
 export { ReviewResult } from './ReviewResult'
-export { ReviewHistoryCard } from './ReviewHistoryCard'
