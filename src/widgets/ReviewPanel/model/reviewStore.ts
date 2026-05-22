@@ -1,7 +1,6 @@
-import type { IReviewData } from '@shared/types'
+import type { IReviewData, IReviewHistoryItem, TReviewHistory } from '@shared/types'
 import { action, makeAutoObservable, runInAction } from 'mobx'
 import { postReview } from '../api'
-import type { IReviewHistoryItem, TReviewHistory } from './types'
 
 const STORAGE_KEY = 'reviews_history'
 const codeTemplate = `export function Hello() {
