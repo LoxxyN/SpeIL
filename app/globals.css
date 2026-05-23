@@ -60,10 +60,6 @@
   --field-radius: 0.25rem;
 }
 
-.as {
-  min-height: fit-content;
-}
-
 .dark,
 [data-theme='dark'] {
   color-scheme: dark;
