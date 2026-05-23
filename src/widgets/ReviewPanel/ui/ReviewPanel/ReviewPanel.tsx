@@ -4,18 +4,11 @@ import { ReviewResult } from '@entities/index'
 import { CodeEditor, CopyCodeButton } from '@features/index'
 import { toast } from '@heroui/react'
 import { observer } from 'mobx-react-lite'
-import { useEffect } from 'react'
 import { reviewStore } from '../../model/reviewStore'
 import { EditorActionButtons } from '../EditorActionButtons'
 import './ReviewPanel.css'
 
 export const ReviewPanel = observer(() => {
-  const { postReviewAction, setCode, clearEditor, code, isLoading, lastReview } = reviewStore
-
-  useEffect(() => {
-    reviewStore.loadStorage()
-  }, [])
-
   const callDangerToast = () => {
     if (!document.hidden) {
       toast.danger('Что то пошло не так', { description: 'Повторите попытку' })
@@ -31,23 +24,27 @@ export const ReviewPanel = observer(() => {
   }
 
   const getReview = () => {
-    postReviewAction(code).catch((error) => error && callDangerToast())
+    reviewStore.postReviewAction(reviewStore.code).catch((error) => error && callDangerToast())
+  }
+
+  const setCode = (value: string) => {
+    reviewStore.setCode(value)
   }
 
   return (
     <section className="review-panel">
       <div className="flex w-1/2 flex-col gap-6">
         <div className="editor-container">
-          <CodeEditor value={code} onValueChange={setCode} />
-          <CopyCodeButton code={code} />
+          <CodeEditor value={reviewStore.code} onValueChange={setCode} />
+          <CopyCodeButton code={reviewStore.code} />
         </div>
         <EditorActionButtons
-          isLoading={isLoading}
-          handleClear={clearEditor}
+          isLoading={reviewStore.isLoading}
+          handleClear={reviewStore.clearEditor}
           handleGetReview={getReview}
         />
       </div>
-      <ReviewResult review={lastReview} isLoading={isLoading} />
+      <ReviewResult review={reviewStore.lastReview} isLoading={reviewStore.isLoading} />
     </section>
   )
 })

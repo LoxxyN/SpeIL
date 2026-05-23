@@ -1,80 +1,63 @@
-import type { IReviewData, IReviewHistoryItem, TReviewHistory } from '@shared/types'
+import { baseHistoryStore } from '@shared/lib'
+import type { IReviewData, IReviewHistoryItem } from '@shared/types'
 import { action, makeAutoObservable, runInAction } from 'mobx'
 import { postReview } from '../api'
 
-const STORAGE_KEY = 'reviews_history'
 const codeTemplate = `export function Hello() {
   return (<h1>Hello World!</h1>)
 }`
 
-class ReviewStore {
-  isLoading: boolean = false
-  reviewDataHistory: TReviewHistory = []
-  code: string = codeTemplate
-  reviewCode: string = ''
+export const reviewStore = makeAutoObservable(
+  {
+    isLoading: false,
+    code: codeTemplate,
+    reviewCode: '',
 
-  constructor() {
-    makeAutoObservable(this)
-  }
+    get lastReview() {
+      return baseHistoryStore.reviewDataHistory[0]?.review ?? null
+    },
 
-  get lastReview() {
-    return this.reviewDataHistory[0]?.review ?? null
-  }
+    get reviewData() {
+      return baseHistoryStore.reviewDataHistory
+    },
 
-  private _updateStorage = () => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.reviewDataHistory))
-    } catch (error) {
-      console.error('Failed to save a review history from localstorage:', error)
-    }
-  }
+    async postReviewAction(code: string) {
+      try {
+        this.isLoading = true
+        const newReview = await postReview(code)
 
-  loadStorage = () => {
-    try {
-      const isStored = localStorage.getItem(STORAGE_KEY)
-      if (isStored) {
-        this.reviewDataHistory = JSON.parse(isStored)
-      } else {
-        this._updateStorage()
+        runInAction(() => {
+          this.reviewCode = code
+          this.addReviewToHistory(newReview)
+        })
+      } catch (error) {
+        throw new Error(`postReviewAction error: ${error}`)
+      } finally {
+        runInAction(() => (this.isLoading = false))
       }
-    } catch (error) {
-      console.error('Failed to load a review history from localstorage:', error)
-    }
+    },
+
+    addReviewToHistory(newReviewData: IReviewData) {
+      const newReview: IReviewHistoryItem = {
+        code: this.reviewCode,
+        review: newReviewData.review,
+        reviewId: crypto.randomUUID(),
+        createdAt: Date.now(),
+      }
+
+      baseHistoryStore.reviewDataHistory = [newReview, ...baseHistoryStore.reviewDataHistory]
+      baseHistoryStore.updateStorage()
+    },
+
+    clearEditor() {
+      this.code = ''
+    },
+
+    setCode(value: string) {
+      this.code = value
+    },
+  },
+  {
+    postReviewAction: action,
   }
-
-  postReviewAction = action(async (code: string) => {
-    try {
-      this.isLoading = true
-      const newReview = await postReview(code)
-
-      this.reviewCode = code
-      this.addReviewToHistory(newReview)
-    } catch (error) {
-      throw new Error(`postReviewAction error: ${error}`)
-    } finally {
-      runInAction(() => (this.isLoading = false))
-    }
-  })
-
-  addReviewToHistory = (newReviewData: IReviewData) => {
-    const newReview: IReviewHistoryItem = {
-      code: this.reviewCode,
-      review: newReviewData.review,
-      reviewId: crypto.randomUUID(),
-      createdAt: Date.now(),
-    }
-
-    this.reviewDataHistory = [newReview, ...this.reviewDataHistory]
-    this._updateStorage()
-  }
-
-  clearEditor = () => {
-    this.code = ''
-  }
-
-  setCode = (value: string) => {
-    this.code = value
-  }
-}
-
-export const reviewStore = new ReviewStore()
+)
