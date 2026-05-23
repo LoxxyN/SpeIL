@@ -1,33 +1,42 @@
+'use client'
+
 import { historyStore } from '../../model'
 import { ReviewHistoryCard } from '../ReviewHistoryCard'
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
+import { formatDateTime } from '@shared/lib'
 import { Separator } from '@heroui/react'
+import { BackLink } from '@shared/ui'
 
 export const ReviewHistoryList = () => {
-  const { allReviews } = historyStore
-  const isLast = true
+  const { allReviews, removeReviewById } = historyStore
 
-  const formatDateTime = (timestamp: number) => {
-    const formattedDate = new Date(timestamp).toLocaleDateString('ru-RU').replaceAll('/', '.')
-    return formattedDate
-  }
+  useEffect(() => {
+    historyStore.loadStorage()
+  }, [])
 
   return (
     <section className="review-history">
-      {allReviews.map((item) => {
-        if (typeof item.createdAt === 'undefined') return
+      <BackLink href="/" title="На главную" />
 
-        return (
-          <Fragment key={item.reviewId}>
-            <ReviewHistoryCard
-              code={item.code}
-              review={item.review}
-              createDateTime={formatDateTime(item.createdAt)}
-            />
-            {isLast && <Separator className="my-9" variant="secondary" />}
-          </Fragment>
-        )
-      })}
+      <div className="review-list">
+        {allReviews.map((item, index) => {
+          if (typeof item.createdAt === 'undefined') return
+
+          return (
+            <Fragment key={item.reviewId}>
+              <ReviewHistoryCard
+                code={item.code}
+                review={item.review}
+                createDateTime={formatDateTime(item.createdAt)}
+                removeReview={() => removeReviewById(item.reviewId)}
+              />
+              {index !== allReviews.length - 1 && (
+                <Separator className="my-9" variant="secondary" />
+              )}
+            </Fragment>
+          )
+        })}
+      </div>
     </section>
   )
 }

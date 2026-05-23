@@ -1,15 +1,20 @@
 import './ReviewHistoryCard.css'
-import { Button, Card, ScrollShadow } from '@heroui/react'
-import { CodeEditor } from '@features/index'
-import { TrashBin } from '@gravity-ui/icons'
+import { Card, ScrollShadow } from '@heroui/react'
+import { CodeEditor, RemoveReviewButton } from '@features/index'
 import { RatingCard } from '@shared/ui'
 import type { IReviewHistoryItem } from '@shared/types'
 
 interface IReviewHistoryCard extends IReviewHistoryItem {
   createDateTime: string
+  removeReview: () => void
 }
 
-export const ReviewHistoryCard = ({ code, review, createDateTime }: IReviewHistoryCard) => {
+export const ReviewHistoryCard = ({
+  code,
+  review,
+  createDateTime,
+  removeReview,
+}: IReviewHistoryCard) => {
   return (
     <Card className="review-history-card">
       <div className="review-card">
@@ -20,10 +25,7 @@ export const ReviewHistoryCard = ({ code, review, createDateTime }: IReviewHisto
         <div className="review-card__content">
           <div className="review-card__header">
             <h2 className="review-card__header-title">Создано: {createDateTime}</h2>
-            <Button size="lg" variant="danger">
-              Удалить
-              <TrashBin />
-            </Button>
+            <RemoveReviewButton onRemoveReview={removeReview} />
           </div>
 
           <div className="review-card__description">
