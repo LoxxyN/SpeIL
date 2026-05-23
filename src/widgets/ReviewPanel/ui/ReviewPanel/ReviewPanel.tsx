@@ -1,14 +1,20 @@
 'use client'
 
+import { baseHistoryStore } from '@/src/shared/lib'
 import { ReviewResult } from '@entities/index'
 import { CodeEditor, CopyCodeButton } from '@features/index'
 import { toast } from '@heroui/react'
 import { observer } from 'mobx-react-lite'
+import { useEffect } from 'react'
 import { reviewStore } from '../../model/reviewStore'
 import { EditorActionButtons } from '../EditorActionButtons'
 import './ReviewPanel.css'
 
 export const ReviewPanel = observer(() => {
+  useEffect(() => {
+    baseHistoryStore.loadStorage()
+  }, [])
+
   const callDangerToast = () => {
     if (!document.hidden) {
       toast.danger('Что то пошло не так', { description: 'Повторите попытку' })

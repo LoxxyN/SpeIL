@@ -6,6 +6,7 @@ const STORAGE_KEY = 'reviews_history' as const
 function createBaseHistoryStore() {
   const store = {
     reviewDataHistory: [] as IReviewHistoryItem[],
+    isLoaded: false,
 
     loadStorage() {
       try {
@@ -17,6 +18,8 @@ function createBaseHistoryStore() {
         }
       } catch (error) {
         console.error('Failed to load a review history from localstorage:', error)
+      } finally {
+        store.isLoaded = true
       }
     },
 
@@ -30,8 +33,6 @@ function createBaseHistoryStore() {
   }
 
   makeAutoObservable(store)
-  store.loadStorage()
-
   return store
 }
 
