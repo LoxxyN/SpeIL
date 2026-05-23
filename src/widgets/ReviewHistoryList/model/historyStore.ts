@@ -46,6 +46,11 @@ class HistoryStore {
     return this.reviewDataHistory
   }
 
+  clearHistory = () => {
+    this.reviewDataHistory = []
+    this._updateStorage()
+  }
+
   removeReviewById(reviewId: number | string | undefined): TReviewHistory {
     if (typeof reviewId === 'undefined') return []
     return this.reviewDataHistory.filter((item) => item.reviewId !== reviewId)

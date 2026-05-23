@@ -6,9 +6,10 @@ import { Fragment, useEffect } from 'react'
 import { formatDateTime } from '@shared/lib'
 import { Separator } from '@heroui/react'
 import { BackLink } from '@shared/ui'
+import { ClearHistoryButton } from '@features/index'
 
 export const ReviewHistoryList = () => {
-  const { allReviews, removeReviewById } = historyStore
+  const { allReviews, removeReviewById, clearHistory } = historyStore
 
   useEffect(() => {
     historyStore.loadStorage()
@@ -16,7 +17,10 @@ export const ReviewHistoryList = () => {
 
   return (
     <section className="review-history">
-      <BackLink href="/" title="На главную" />
+      <div className='flex justify-between items-center'>
+        <BackLink href="/" title="На главную" />
+        <ClearHistoryButton onRemoveReview={clearHistory} />
+      </div>
 
       <div className="review-list">
         {allReviews.map((item, index) => {
