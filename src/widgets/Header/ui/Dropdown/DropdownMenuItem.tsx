@@ -1,5 +1,3 @@
-'use client'
-
 import { Dropdown, Switch } from '@heroui/react'
 import type { IDropdownItems } from '../../model/types'
 
