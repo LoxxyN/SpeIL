@@ -13,7 +13,7 @@ export const RatingCard = ({ reviewType, description }: Omit<IRatingCard, 'id'>)
   return (
     <div className="flex flex-col gap-2.5">
       <div>
-        <Chip size="lg" variant="soft" color={reviewType}>
+        <Chip className="font-mono font-semibold" size="lg" variant="soft" color={reviewType}>
           <>{ratingChipLabel}</>
         </Chip>
       </div>

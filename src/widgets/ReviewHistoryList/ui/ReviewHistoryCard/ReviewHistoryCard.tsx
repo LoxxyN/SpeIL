@@ -1,8 +1,8 @@
-import './ReviewHistoryCard.css'
-import { Card, ScrollShadow } from '@heroui/react'
+import { ReviewResultList } from '@entities/index'
 import { CodeEditor, RemoveReviewButton } from '@features/index'
-import { RatingCard } from '@shared/ui'
+import { Card } from '@heroui/react'
 import type { IReviewHistoryItem } from '@shared/types'
+import './ReviewHistoryCard.css'
 
 interface IReviewHistoryCard extends IReviewHistoryItem {
   createDateTime: string
@@ -29,19 +29,7 @@ export const ReviewHistoryCard = ({
           </div>
 
           <div className="review-card__description">
-            <ScrollShadow hideScrollBar className="h-60">
-              {review === null ? (
-                <div>Тут пусто</div>
-              ) : (
-                review.map((item) => (
-                  <RatingCard
-                    key={item.id}
-                    reviewType={item.reviewType}
-                    description={item.description}
-                  />
-                ))
-              )}
-            </ScrollShadow>
+            <ReviewResultList review={review} />
           </div>
         </div>
       </div>

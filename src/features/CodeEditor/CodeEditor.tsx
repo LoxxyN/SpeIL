@@ -75,8 +75,7 @@ export const CodeEditor = observer(({ value, onValueChange, isReadonly }: TCodeE
   return (
     <div className="editor-panel">
       <Editor
-        className="editor-window"
-        height="500px"
+        className={`editor-window ${theme === 'dark' ? 'editor-window--dark' : ''}`}
         theme={theme === 'dark' ? 'dark-plus' : 'light-plus'}
         language="typescript"
         value={value}
@@ -86,6 +85,7 @@ export const CodeEditor = observer(({ value, onValueChange, isReadonly }: TCodeE
           readOnly: isReadonly,
           minimap: { enabled: false },
           glyphMargin: false,
+          lineNumbers: 'off',
           folding: false,
           fontSize: 18,
           lineNumbersMinChars: 3,

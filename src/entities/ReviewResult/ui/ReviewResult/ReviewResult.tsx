@@ -1,11 +1,11 @@
 'use client'
 
-import { ScrollShadow, Spinner } from '@heroui/react'
+import { Spinner } from '@heroui/react'
 import type { TReviewData } from '@shared/types'
-import { RatingCard } from '@shared/ui'
 import { observer } from 'mobx-react-lite'
 import { memo } from 'react'
 import { ReviewResultEmpty } from '../ReviewResultEmpty'
+import { ReviewResultList } from '../ReviewResultList'
 import './ReviewResult.css'
 
 type TReviewResult = { review: TReviewData; isLoading: boolean }
@@ -16,21 +16,7 @@ const ReviewResult = observer(({ review, isLoading }: TReviewResult) => {
   return (
     <div className="review-result">
       <h2>Результаты последнего ревью</h2>
-      {isLoading ? (
-        <Spinner color="current" size="xl" />
-      ) : (
-        <ScrollShadow className="max-h-100" hideScrollBar>
-          <div className="review-list">
-            {review.map((item) => (
-              <RatingCard
-                key={item.id}
-                reviewType={item.reviewType}
-                description={item.description}
-              />
-            ))}
-          </div>
-        </ScrollShadow>
-      )}
+      {isLoading ? <Spinner color="current" size="xl" /> : <ReviewResultList review={review} />}
     </div>
   )
 })
