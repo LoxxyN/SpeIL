@@ -1,1 +1,1 @@
-export { ReviewResult } from './ui'
+export { ReviewResult, ReviewResultList } from './ui'

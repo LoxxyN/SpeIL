@@ -1,6 +1,7 @@
 .editor-panel {
   display: flex;
   flex-direction: column;
+  height: 100%;
   width: 100%;
   gap: 28px;
   position: relative;
@@ -9,5 +10,6 @@
 .editor-window {
   position: relative;
   height: 100%;
+  width: 100%;
   z-index: 5;
 }

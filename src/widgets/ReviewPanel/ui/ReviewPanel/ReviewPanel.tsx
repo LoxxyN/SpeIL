@@ -1,9 +1,9 @@
 'use client'
 
-import { baseHistoryStore } from '@/src/shared/lib'
 import { ReviewResult } from '@entities/index'
 import { CodeEditor, CopyCodeButton } from '@features/index'
 import { toast } from '@heroui/react'
+import { baseHistoryStore } from '@shared/lib'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { reviewStore } from '../../model/reviewStore'
@@ -17,11 +17,11 @@ export const ReviewPanel = observer(() => {
 
   const callDangerToast = () => {
     if (!document.hidden) {
-      toast.danger('Что то пошло не так', { description: 'Повторите попытку' })
+      toast.danger('Ой, что то пошло не так', { description: 'Пожалуйста повторите попытку' })
     } else {
       const onVisibilityChange = () => {
         if (!document.hidden) {
-          toast.danger('Что то пошло не так', { description: 'Повторите попытку' })
+          toast.danger('Ой, что то пошло не так', { description: 'Пожалуйста повторите попытку' })
           document.removeEventListener('visibilitychange', onVisibilityChange)
         }
       }
@@ -39,7 +39,7 @@ export const ReviewPanel = observer(() => {
 
   return (
     <section className="review-panel">
-      <div className="flex w-1/2 flex-col gap-6">
+      <div className="flex w-2/5 flex-col gap-6">
         <div className="editor-container">
           <CodeEditor value={reviewStore.code} onValueChange={setCode} />
           <CopyCodeButton code={reviewStore.code} />

@@ -40,7 +40,7 @@ export default async function RootLayout({
         <Toast.Provider placement="top" />
         <body className="flex min-h-full flex-col justify-between">
           <Header />
-          <main>{children}</main>
+          <main className="py-12">{children}</main>
           <Footer />
         </body>
       </StoreProvider>

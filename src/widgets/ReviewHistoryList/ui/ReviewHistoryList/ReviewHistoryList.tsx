@@ -20,7 +20,7 @@ export const ReviewHistoryList = observer(() => {
 
   return (
     <section className="review-history">
-      <div className="flex items-center justify-between">
+      <div className="mb-10 flex items-center justify-between">
         <BackLink href="/" title="На главную" />
         <ClearHistoryButton onRemoveReview={historyStore.clearHistory} />
       </div>
