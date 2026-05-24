@@ -38,9 +38,9 @@ export default async function RootLayout({
     >
       <StoreProvider initialTheme={initialTheme}>
         <Toast.Provider placement="top" />
-        <body className="flex flex-col justify-between">
+        <body className="flex min-h-full flex-col justify-between">
           <Header />
-          <main className="h-full py-16">{children}</main>
+          <main className="flex-1 py-16">{children}</main>
           <Footer />
         </body>
       </StoreProvider>
