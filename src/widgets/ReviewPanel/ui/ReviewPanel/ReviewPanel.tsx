@@ -1,5 +1,6 @@
 'use client'
 
+import { themeStore } from '@/app/store'
 import { ReviewResult } from '@entities/index'
 import { CodeEditor, CopyCodeButton } from '@features/index'
 import { toast } from '@heroui/react'
@@ -11,6 +12,7 @@ import { EditorActionButtons } from '../EditorActionButtons'
 import './ReviewPanel.css'
 
 export const ReviewPanel = observer(() => {
+  const { theme } = themeStore
   useEffect(() => {
     baseHistoryStore.loadStorage()
   }, [])
@@ -38,7 +40,7 @@ export const ReviewPanel = observer(() => {
   }
 
   return (
-    <section className="review-panel">
+    <section className={`review-panel ${theme === 'dark' ? 'review-panel--dark' : ''} `}>
       <div className="flex w-2/5 flex-col gap-6">
         <div className="editor-container">
           <CodeEditor value={reviewStore.code} onValueChange={setCode} />
