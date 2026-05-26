@@ -17,6 +17,10 @@ export const reviewStore = makeAutoObservable(
       return baseHistoryStore.reviewDataHistory[0]?.review ?? null
     },
 
+    getReviewById(reviewId: string) {
+      return baseHistoryStore.reviewDataHistory.find((item) => item.reviewId === reviewId)
+    },
+
     get reviewData() {
       return baseHistoryStore.reviewDataHistory
     },

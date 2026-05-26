@@ -1,58 +1,38 @@
 'use client'
 
-import { themeStore } from '@/app/store'
-import { ReviewResult } from '@entities/index'
-import { CodeEditor, CopyCodeButton } from '@features/index'
-import { toast } from '@heroui/react'
-import { baseHistoryStore } from '@shared/lib'
+import { baseHistoryStore } from '@/src/shared/lib'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
-import { reviewStore } from '../../model/reviewStore'
-import { EditorActionButtons } from '../EditorActionButtons'
-import './ReviewPanel.css'
+import { reviewStore, useDangerToast } from '../../model'
+import { ReviewPanelWrapper } from './ReviewPanelWrapper'
 
-export const ReviewPanel = observer(() => {
-  const { theme } = themeStore
-  useEffect(() => {
-    baseHistoryStore.loadStorage()
-  }, [])
+export const ReviewPanel = observer(
+  ({ showActions, isReadonly }: { showActions: boolean; isReadonly: boolean }) => {
+    const { callDangerToast } = useDangerToast()
 
-  const callDangerToast = () => {
-    if (!document.hidden) {
-      toast.danger('Ой, что то пошло не так', { description: 'Пожалуйста повторите попытку' })
-    } else {
-      const onVisibilityChange = () => {
-        if (!document.hidden) {
-          toast.danger('Ой, что то пошло не так', { description: 'Пожалуйста повторите попытку' })
-          document.removeEventListener('visibilitychange', onVisibilityChange)
-        }
-      }
-      document.addEventListener('visibilitychange', onVisibilityChange)
+    useEffect(() => {
+      baseHistoryStore.loadStorage()
+    }, [])
+
+    const getReview = () => {
+      reviewStore.postReviewAction(reviewStore.code).catch((error) => error && callDangerToast())
     }
-  }
 
-  const getReview = () => {
-    reviewStore.postReviewAction(reviewStore.code).catch((error) => error && callDangerToast())
-  }
+    const setCode = (value: string) => {
+      reviewStore.setCode(value)
+    }
 
-  const setCode = (value: string) => {
-    reviewStore.setCode(value)
+    return (
+      <ReviewPanelWrapper
+        isReadonly={isReadonly}
+        showActions={showActions}
+        isLoading={reviewStore.isLoading}
+        code={reviewStore.code}
+        review={reviewStore.lastReview}
+        clearEditor={() => reviewStore.clearEditor()}
+        getReview={getReview}
+        setCode={setCode}
+      />
+    )
   }
-
-  return (
-    <section className={`review-panel ${theme === 'dark' ? 'review-panel--dark' : ''} `}>
-      <div className="flex w-2/5 flex-col gap-6">
-        <div className="editor-container">
-          <CodeEditor value={reviewStore.code} onValueChange={setCode} />
-          <CopyCodeButton code={reviewStore.code} />
-        </div>
-        <EditorActionButtons
-          isLoading={reviewStore.isLoading}
-          handleClear={reviewStore.clearEditor}
-          handleGetReview={getReview}
-        />
-      </div>
-      <ReviewResult review={reviewStore.lastReview} isLoading={reviewStore.isLoading} />
-    </section>
-  )
-})
+)
