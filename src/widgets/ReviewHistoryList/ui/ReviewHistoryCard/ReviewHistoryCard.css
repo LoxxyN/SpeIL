@@ -10,13 +10,14 @@
 }
 
 .review-card__code-wrapper {
-  width: 40%;
+  width: 60%;
   height: 100%;
 }
 
 .review-card__content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 32px;
   height: 100%;
   width: 100%;
