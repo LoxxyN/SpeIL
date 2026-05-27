@@ -1,10 +1,10 @@
-import { Copy } from '@gravity-ui/icons'
+import { Check, Copy } from '@gravity-ui/icons'
 import { Button } from '@heroui/react'
 import { useCopyCode } from '../model'
 import './CopyCodeButton.css'
 
 export const CopyCodeButton = ({ code }: { code: string }) => {
-  const { copyFunction } = useCopyCode()
+  const { copyFunction, isCopying } = useCopyCode()
 
   const handleCopyCode = () => copyFunction(code)
 
@@ -15,10 +15,17 @@ export const CopyCodeButton = ({ code }: { code: string }) => {
       size="lg"
       variant="tertiary"
     >
-      <span className="flex items-center gap-3">
-        <Copy />
-        Копировать
-      </span>
+      {isCopying ? (
+        <span className="flex items-center gap-3">
+          <Check />
+          Скопировано
+        </span>
+      ) : (
+        <span className="flex items-center gap-3">
+          <Copy />
+          Копировать
+        </span>
+      )}
     </Button>
   )
 }

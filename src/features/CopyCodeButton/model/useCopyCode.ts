@@ -9,7 +9,10 @@ export const useCopyCode = () => {
   const copyFunction = async (code: string) => {
     setIsCopying(true)
     copyToClipboard(code)
-    setIsCopying(false)
+
+    setTimeout(() => {
+      setIsCopying(false)
+    }, 3000)
   }
 
   return {
