@@ -5,9 +5,9 @@ import { EditorActionButtons } from '../EditorActionButtons'
 import './ReviewPanelWrapper.css'
 
 type TReviewPanel = {
-  showActions: boolean
   isLoading: boolean
-  isReadonly: boolean
+  showActions?: boolean
+  isReadonly?: boolean
   code?: string
   review?: TReviewData
   setCode: (value: string) => void
@@ -16,9 +16,9 @@ type TReviewPanel = {
 }
 
 export const ReviewPanelWrapper = ({
-  showActions,
+  showActions = true,
   isLoading,
-  isReadonly,
+  isReadonly = true,
   code,
   review,
   setCode,

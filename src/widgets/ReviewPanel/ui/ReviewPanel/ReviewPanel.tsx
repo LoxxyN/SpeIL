@@ -30,32 +30,31 @@ export const ReviewPanel = observer(
       reviewStore.setCode(value)
     }
 
+    const baseReviewPanelProps = {
+      isLoading: reviewStore.isLoading,
+      isReadonly: isReadonly,
+      showActions: showActions,
+      getReview: getReview,
+      setCode: setCode,
+      clearEditor: () => reviewStore.clearEditor(),
+    }
+
     if (typeof reviewId === 'undefined') {
       return (
         <ReviewPanelWrapper
-          isReadonly={false}
-          showActions={showActions}
-          isLoading={reviewStore.isLoading}
+          {...baseReviewPanelProps}
           code={reviewStore.code}
           review={reviewStore.lastReview}
-          clearEditor={() => reviewStore.clearEditor()}
-          getReview={getReview}
-          setCode={setCode}
-        />
-      )
-    } else {
-      return (
-        <ReviewPanelWrapper
-          isReadonly={isReadonly}
-          showActions={showActions}
-          isLoading={reviewStore.isLoading}
-          code={reviewStore.getReviewById(reviewId)?.code}
-          review={reviewStore.getReviewById(reviewId)?.review}
-          clearEditor={() => reviewStore.clearEditor()}
-          getReview={getReview}
-          setCode={setCode}
         />
       )
     }
+
+    return (
+      <ReviewPanelWrapper
+        {...baseReviewPanelProps}
+        code={reviewStore.getReviewById(reviewId)?.code}
+        review={reviewStore.getReviewById(reviewId)?.review}
+      />
+    )
   }
 )
