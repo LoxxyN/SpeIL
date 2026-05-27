@@ -8,8 +8,8 @@ type TReviewPanel = {
   showActions: boolean
   isLoading: boolean
   isReadonly: boolean
-  code: string
-  review: TReviewData
+  code?: string
+  review?: TReviewData
   setCode: (value: string) => void
   clearEditor: () => void
   getReview: () => void
@@ -25,6 +25,8 @@ export const ReviewPanelWrapper = ({
   clearEditor,
   getReview,
 }: TReviewPanel) => {
+  if (typeof code === 'undefined') return
+  if (typeof review === 'undefined') return
   const renderActionButtons = () => {
     if (!showActions) {
       return null

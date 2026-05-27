@@ -1,13 +1,21 @@
 'use client'
 
-import { baseHistoryStore } from '@/src/shared/lib'
+import { baseHistoryStore } from '@shared/lib'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { reviewStore, useDangerToast } from '../../model'
 import { ReviewPanelWrapper } from './ReviewPanelWrapper'
 
 export const ReviewPanel = observer(
-  ({ showActions, isReadonly }: { showActions: boolean; isReadonly: boolean }) => {
+  ({
+    showActions,
+    isReadonly,
+    reviewId,
+  }: {
+    showActions: boolean
+    isReadonly: boolean
+    reviewId?: string
+  }) => {
     const { callDangerToast } = useDangerToast()
 
     useEffect(() => {
@@ -22,17 +30,32 @@ export const ReviewPanel = observer(
       reviewStore.setCode(value)
     }
 
-    return (
-      <ReviewPanelWrapper
-        isReadonly={isReadonly}
-        showActions={showActions}
-        isLoading={reviewStore.isLoading}
-        code={reviewStore.code}
-        review={reviewStore.lastReview}
-        clearEditor={() => reviewStore.clearEditor()}
-        getReview={getReview}
-        setCode={setCode}
-      />
-    )
+    if (typeof reviewId === 'undefined') {
+      return (
+        <ReviewPanelWrapper
+          isReadonly={false}
+          showActions={showActions}
+          isLoading={reviewStore.isLoading}
+          code={reviewStore.code}
+          review={reviewStore.lastReview}
+          clearEditor={() => reviewStore.clearEditor()}
+          getReview={getReview}
+          setCode={setCode}
+        />
+      )
+    } else {
+      return (
+        <ReviewPanelWrapper
+          isReadonly={isReadonly}
+          showActions={showActions}
+          isLoading={reviewStore.isLoading}
+          code={reviewStore.getReviewById(reviewId)?.code}
+          review={reviewStore.getReviewById(reviewId)?.review}
+          clearEditor={() => reviewStore.clearEditor()}
+          getReview={getReview}
+          setCode={setCode}
+        />
+      )
+    }
   }
 )
