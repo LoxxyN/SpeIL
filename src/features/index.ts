@@ -1,6 +1,7 @@
 export { ClearEditor } from './ClearEditor'
+export { ClearHistoryButton } from './ClearHistoryButton'
 export { CodeEditor } from './CodeEditor'
 export { CopyCodeButton } from './CopyCodeButton'
+export { CopyReviewButton } from './CopyReview'
 export { GetReviewButton } from './GetReviewButton'
 export { RemoveReviewButton } from './RemoveReviewButton'
-export { ClearHistoryButton } from './ClearHistoryButton'

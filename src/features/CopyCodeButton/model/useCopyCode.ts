@@ -12,7 +12,7 @@ export const useCopyCode = () => {
 
     setTimeout(() => {
       setIsCopying(false)
-    }, 3000)
+    }, 1500)
   }
 
   return {
