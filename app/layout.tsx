@@ -3,18 +3,7 @@ import { StoreProvider } from '@/app/providers'
 import { Toast } from '@heroui/react'
 import { Footer, Header } from '@widgets/index'
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
 import { cookies } from 'next/headers'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
 
 export const metadata: Metadata = {
   title: 'Speil reviewer',
@@ -31,11 +20,7 @@ export default async function RootLayout({
   const initialTheme = cookieTheme === 'dark' ? 'dark' : 'light'
 
   return (
-    <html
-      lang="ru"
-      className={`${geistSans.variable} ${geistMono.variable} flex h-full flex-col antialiased`}
-      data-theme={initialTheme}
-    >
+    <html lang="ru" className="flex h-full flex-col antialiased" data-theme={initialTheme}>
       <StoreProvider initialTheme={initialTheme}>
         <Toast.Provider placement="top" />
         <body className="flex min-h-full flex-col justify-between">
