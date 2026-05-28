@@ -2,7 +2,7 @@ import { TrashBin } from '@gravity-ui/icons'
 import { Button } from '@heroui/react'
 
 type TDeleteButton = {
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent) => void
   slot?: string
   size?: 'lg' | 'md' | 'sm'
   hasTrashIcon: boolean

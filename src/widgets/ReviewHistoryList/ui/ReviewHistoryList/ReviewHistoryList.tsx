@@ -32,6 +32,7 @@ export const ReviewHistoryList = observer(() => {
           return (
             <Fragment key={item.reviewId}>
               <ReviewHistoryCard
+                href={`/review/${item.reviewId}`}
                 code={item.code}
                 review={item.review}
                 createDateTime={formatDateTime(item.createdAt)}

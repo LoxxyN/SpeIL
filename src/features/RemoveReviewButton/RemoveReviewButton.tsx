@@ -2,9 +2,14 @@ import { AlertDialog, Button } from '@heroui/react'
 import { DeleteButton } from '@shared/ui'
 
 export const RemoveReviewButton = ({ onRemoveReview }: { onRemoveReview: () => void }) => {
+  const stopEvent = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    e.preventDefault()
+  }
+
   return (
     <AlertDialog>
-      <DeleteButton label="Удалить" hasTrashIcon />
+      <DeleteButton label="Удалить" hasTrashIcon onClick={stopEvent} />
       <AlertDialog.Backdrop variant="blur">
         <AlertDialog.Container size="sm">
           <AlertDialog.Dialog>
@@ -25,7 +30,10 @@ export const RemoveReviewButton = ({ onRemoveReview }: { onRemoveReview: () => v
               <DeleteButton
                 size="md"
                 slot="close"
-                onClick={onRemoveReview}
+                onClick={(e) => {
+                  stopEvent(e)
+                  onRemoveReview()
+                }}
                 hasTrashIcon={false}
                 label="Подтвердить"
               />

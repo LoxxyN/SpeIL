@@ -1,6 +1,6 @@
 import { ClearEditor, GetReviewButton } from '@features/index'
 
-type TEditorActionButton = {
+export type TEditorActionButtons = {
   handleClear: () => void
   handleGetReview: () => void
   isLoading: boolean
@@ -10,7 +10,7 @@ export const EditorActionButtons = ({
   handleClear,
   handleGetReview,
   isLoading,
-}: TEditorActionButton) => {
+}: TEditorActionButtons) => {
   return (
     <div className="flex justify-evenly">
       <ClearEditor handleClear={handleClear} />
