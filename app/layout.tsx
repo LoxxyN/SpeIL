@@ -1,9 +1,10 @@
+import '@/app/globals.css'
+import { StoreProvider } from '@/app/providers'
+import { Toast } from '@heroui/react'
 import { Footer, Header } from '@widgets/index'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { cookies } from 'next/headers'
-import './globals.css'
-import { StoreProvider } from './providers/StoreProvider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -36,9 +37,10 @@ export default async function RootLayout({
       data-theme={initialTheme}
     >
       <StoreProvider initialTheme={initialTheme}>
+        <Toast.Provider placement="top" />
         <body className="flex min-h-full flex-col justify-between">
           <Header />
-          <main>{children}</main>
+          <main className="flex-1 py-16">{children}</main>
           <Footer />
         </body>
       </StoreProvider>

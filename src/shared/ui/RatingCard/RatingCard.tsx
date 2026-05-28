@@ -1,24 +1,24 @@
 import { Chip } from '@heroui/react'
-import type { IRatingCard, TRatingChipLabel, TRatingChipType } from './rating-card.types'
+import type { IRatingCard, TRatingChipType } from './types'
 
-const ratingChipLabelMap: Record<TRatingChipType, TRatingChipLabel> = {
+const labelMap: Record<TRatingChipType, string> = {
   danger: 'Bad',
-  warning: 'Medium',
+  warning: 'Suggestion',
   default: 'NIT',
 }
 
-export const RatingCard = ({ ratingChipType, ratingText }: IRatingCard) => {
-  const ratingChipLabel = ratingChipLabelMap[ratingChipType]
+export const RatingCard = ({ reviewType, description }: Omit<IRatingCard, 'id'>) => {
+  const ratingChipLabel = labelMap[reviewType]
 
   return (
     <div className="flex flex-col gap-2.5">
       <div>
-        <Chip size="lg" variant="soft" color={ratingChipType}>
+        <Chip className="font-mono font-semibold" size="lg" variant="soft" color={reviewType}>
           <>{ratingChipLabel}</>
         </Chip>
       </div>
 
-      <p className="pl-3">{ratingText}</p>
+      <p className="pl-3">{description}</p>
     </div>
   )
 }

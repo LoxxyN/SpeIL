@@ -6,7 +6,8 @@
 }
 
 :root {
-  --white: #ffffff, --black: #000000;
+  --white: #ffffff;
+  --black: #000000;
 
   --fs-16: 16px;
   --fs-20: 20px;
@@ -57,10 +58,6 @@
   /* Border Radius */
   --radius: 0.25rem;
   --field-radius: 0.25rem;
-
-  /* Font Family */
-  /* Make sure to load Figtree font in your app */
-  --font-sans: var(--font-figtree);
 }
 
 .dark,

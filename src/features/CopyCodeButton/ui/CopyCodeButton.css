@@ -1,0 +1,12 @@
+.editor-panel__copy-button {
+  position: absolute;
+  z-index: 10;
+  top: 10px;
+  right: 10px;
+  opacity: 20%;
+  transition: opacity 0.2s ease-in-out;
+
+  &:is(:hover, :focus) {
+    opacity: 100%;
+  }
+}

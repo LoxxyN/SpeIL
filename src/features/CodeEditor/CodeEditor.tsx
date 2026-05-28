@@ -1,13 +1,29 @@
 'use client'
 
-import { Button } from '@heroui/react'
-import Editor, { OnMount } from '@monaco-editor/react'
+import { themeStore } from '@app/store'
+import Editor, { type OnMount } from '@monaco-editor/react'
 import * as shikiMonaco from '@shikijs/monaco'
+import { observer } from 'mobx-react-lite'
 import './CodeEditor.css'
 
-export const CodeEditor = () => {
+type TCodeEditor = {
+  value: string
+  onValueChange?: (value: string) => void
+  isReadonly?: boolean
+}
+
+export const CodeEditor = observer(({ value, onValueChange, isReadonly }: TCodeEditor) => {
+  const { theme } = themeStore
+
+  const handleEditorChange = (value: string | undefined) => {
+    if (value !== undefined) {
+      if (onValueChange) {
+        onValueChange(value)
+      }
+    }
+  }
+
   const handleEditorMount: OnMount = async (editor, monaco) => {
-    // tsx support
     monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
       jsx: monaco.languages.typescript.JsxEmit.ReactJSX,
       allowNonTsExtensions: true,
@@ -44,22 +60,10 @@ export const CodeEditor = () => {
       'file:///node_modules/@types/react/jsx-runtime.d.ts'
     )
 
-    // create tsx model
-    const model = monaco.editor.createModel(
-      `export const App = () => {
-  return <div>Hello</div>
-}`,
-      'typescript',
-      monaco.Uri.parse('file:///main.tsx')
-    )
-
-    editor.setModel(model)
-
-    // shiki
     const { createHighlighter } = await import('shiki')
 
     const highlighter = await createHighlighter({
-      themes: ['dark-plus'],
+      themes: theme === 'dark' ? ['dark-plus', 'light-plus'] : ['light-plus', 'dark-plus'],
       langs: ['javascript', 'typescript', 'tsx', 'jsx'],
     })
 
@@ -70,28 +74,28 @@ export const CodeEditor = () => {
 
   return (
     <div className="editor-panel">
-      <Button className="editor-panel__copy-button" variant="ghost">
-        Копировать код
-      </Button>
       <Editor
         className="editor-window"
-        height="500px"
-        theme="vs-dark"
+        theme={theme === 'dark' ? 'dark-plus' : 'light-plus'}
         language="typescript"
+        value={value}
+        onChange={handleEditorChange}
         onMount={handleEditorMount}
         options={{
+          readOnly: isReadonly,
           minimap: { enabled: false },
           glyphMargin: false,
           folding: false,
-          fontSize: 20,
+
+          fontSize: 16,
           lineNumbersMinChars: 3,
           renderLineHighlight: 'none',
           scrollbar: {
-            verticalScrollbarSize: 8,
-            horizontalScrollbarSize: 8,
+            verticalScrollbarSize: 4,
+            horizontalScrollbarSize: 4,
           },
         }}
       />
     </div>
   )
-}
+})
