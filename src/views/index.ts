@@ -1,3 +1,3 @@
 export { HistoryView } from './history'
 export { HomeView } from './home'
-export { ReviewDetailsView } from './review-details'
+export { ReviewDetailsNotFound, ReviewDetailsView } from './review-details'

@@ -6,16 +6,15 @@ import { useEffect } from 'react'
 import { reviewStore, useDangerToast } from '../../model'
 import { ReviewPanelWrapper } from './ReviewPanelWrapper'
 
+type TReviewPanel = {
+  showActions: boolean
+  isReadonly: boolean
+  children: React.ReactNode
+  reviewId?: string
+}
+
 export const ReviewPanel = observer(
-  ({
-    showActions,
-    isReadonly,
-    reviewId,
-  }: {
-    showActions: boolean
-    isReadonly: boolean
-    reviewId?: string
-  }) => {
+  ({ showActions, isReadonly, children, reviewId }: TReviewPanel) => {
     const { callDangerToast } = useDangerToast()
 
     useEffect(() => {
@@ -49,12 +48,18 @@ export const ReviewPanel = observer(
       )
     }
 
+    if (!baseHistoryStore.isLoaded) {
+      return null
+    }
+
+    const review = reviewStore.getReviewById(reviewId)
+
+    if (!review) {
+      return children
+    }
+
     return (
-      <ReviewPanelWrapper
-        {...baseReviewPanelProps}
-        code={reviewStore.getReviewById(reviewId)?.code}
-        review={reviewStore.getReviewById(reviewId)?.review}
-      />
+      <ReviewPanelWrapper {...baseReviewPanelProps} code={review.code} review={review.review} />
     )
   }
 )

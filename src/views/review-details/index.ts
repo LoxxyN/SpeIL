@@ -1,1 +1,1 @@
-export { ReviewDetailsView } from './ui/ReviewDetailsView'
+export { ReviewDetailsNotFound, ReviewDetailsView } from './ui'

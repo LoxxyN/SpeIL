@@ -1,4 +1,4 @@
-import { Link } from '@heroui/react'
+import Link from 'next/link'
 
 export const ReviewHistoryListEmpty = () => {
   return (
@@ -7,7 +7,7 @@ export const ReviewHistoryListEmpty = () => {
         <h2 className="text-3xl font-semibold">Похоже тут пусто ;(</h2>
         <p className="text-muted">
           Хотите{' '}
-          <Link href="/" className="not-hover:text-muted">
+          <Link href="/" className="link not-hover:text-muted text-base transition">
             получить ревью?
           </Link>
         </p>

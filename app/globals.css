@@ -16,6 +16,9 @@
   --fs-36: 36px;
 
   --page-width: 1440px;
+
+  --font-geist-sans: 'Geist', Arial, Helvetica, sans-serif;
+  --font-geist-mono: 'Geist Mono', Arial, Helvetica, sans-serif;
 }
 
 :root,
@@ -109,5 +112,40 @@
 }
 
 body {
-  font-family: Geist, Arial, Helvetica, sans-serif;
+  font-family: 'Geist', Arial, Helvetica, sans-serif;
+}
+
+button {
+  font-family: 'Geist Mono', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Medium.woff2') format('woff2');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600;
 }
