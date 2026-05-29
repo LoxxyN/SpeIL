@@ -11,7 +11,7 @@ export const ReviewResultEmpty = () => {
           <ul>
             <li>Критические ошибки</li>
             <li>Стилистические ошибки</li>
-            <li>Меклие ошибки</li>
+            <li>Мелкие ошибки</li>
           </ul>
         </div>
 

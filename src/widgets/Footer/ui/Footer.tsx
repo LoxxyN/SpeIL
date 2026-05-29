@@ -1,5 +1,6 @@
 import { Logo } from '@shared/ui'
-import './footer.css'
+import { SOCIAL_LINKS } from '../model'
+import './Footer.css'
 
 export const Footer = () => {
   return (
@@ -8,21 +9,13 @@ export const Footer = () => {
         <Logo />
 
         <div className="footer__social-links">
-          <p>
-            <a href="https://t.me/L0xxyN" className="footer__social-link" target="_blank">
-              Telegram
-            </a>
-          </p>
-          <p>
-            <a href="mailto:feed@speil.dev" className="footer__social-link" target="_blank">
-              feed@speil.dev
-            </a>
-          </p>
-          <p>
-            <a href="https://github.com/LoxxyN" className="footer__social-link" target="_blank">
-              GitHub
-            </a>
-          </p>
+          {SOCIAL_LINKS.map((item) => (
+            <p key={item.id}>
+              <a href={item.href} className="footer__social-link" target="_blank">
+                {item.label}
+              </a>
+            </p>
+          ))}
           <p>
             Powered by{' '}
             <a

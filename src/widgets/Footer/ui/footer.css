@@ -20,10 +20,12 @@
     gap: 4px;
 
     .footer__social-link {
-      font-weight: 600;
+      font-family: var(--font-mono);
+      font-weight: 500;
       display: flex;
       align-items: center;
       text-decoration: underline;
+      text-underline-offset: 3px;
     }
   }
 }

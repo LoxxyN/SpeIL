@@ -7,7 +7,7 @@ import type { MouseEvent } from 'react'
 import './ReviewHistoryCard.css'
 
 interface IReviewHistoryCard extends IReviewHistoryItem {
-  createDateTime: string
+  dateTimeOfCreate: string
   removeReview: () => void
   href: string
 }
@@ -16,7 +16,7 @@ export const ReviewHistoryCard = ({
   href,
   code,
   review,
-  createDateTime,
+  dateTimeOfCreate,
   removeReview,
 }: IReviewHistoryCard) => {
   const stopEvent = (e: MouseEvent<HTMLDivElement>) => {
@@ -33,7 +33,7 @@ export const ReviewHistoryCard = ({
         <div className="review-card__content">
           <Link href={href} className="flex h-full flex-col justify-between">
             <div className="review-card__header">
-              <h2 className="review-card__header-title">Создано: {createDateTime}</h2>
+              <h2 className="review-card__header-title">Создано: {dateTimeOfCreate}</h2>
               <RemoveReviewButton onRemoveReview={removeReview} />
             </div>
 

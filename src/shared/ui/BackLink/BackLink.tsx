@@ -5,7 +5,7 @@ export const BackLink = ({ href, title }: { href: string; title: string }) => {
   return (
     <Link href={href} className="flex items-center gap-2">
       <ArrowLeft className="h-6 w-6" />
-      <span className="text-2xl font-semibold">{title}</span>
+      <span className="text-2xl font-medium">{title}</span>
     </Link>
   )
 }

@@ -11,7 +11,7 @@ export const GetReviewButton = ({
     <Button onClick={handleGetReview} isPending={isLoading} size="lg" variant="tertiary">
       <span className="flex items-center justify-between gap-3">
         {isLoading && <Spinner size="md" color="current" />}
-        {isLoading ? 'Ожидаем...' : 'Получить ревью'}
+        {isLoading ? 'Ожидаем ...' : 'Получить ревью'}
       </span>
     </Button>
   )

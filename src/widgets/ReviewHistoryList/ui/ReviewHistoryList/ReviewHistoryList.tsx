@@ -36,7 +36,7 @@ export const ReviewHistoryList = observer(() => {
                 href={`/review/${item.reviewId}`}
                 code={item.code}
                 review={item.review}
-                createDateTime={formatDateTime(item.createdAt)}
+                dateTimeOfCreate={formatDateTime(item.createdAt)}
                 removeReview={() => historyStore.removeReviewById(item.reviewId)}
               />
               {index !== historyStore.reviewData.length - 1 && (
