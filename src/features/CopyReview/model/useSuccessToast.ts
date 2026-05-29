@@ -1,17 +1,15 @@
 import { toast } from '@heroui/react'
 
-export const useDangerToast = () => {
-  const callDangerToast = () => {
+export const useSuccessToast = () => {
+  const callSuccessToast = () => {
     if (!document.hidden) {
-      toast.danger('Ой, что то пошло не так', {
-        description: 'Пожалуйста повторите попытку',
+      toast.success('Ревью успешно скопировано', {
         timeout: 1500,
       })
     } else {
       const onVisibilityChange = () => {
         if (!document.hidden) {
-          toast.danger('Ой, что то пошло не так', {
-            description: 'Пожалуйста повторите попытку',
+          toast.success('Ревью успешно скопировано', {
             timeout: 1500,
           })
           document.removeEventListener('visibilitychange', onVisibilityChange)
@@ -21,5 +19,5 @@ export const useDangerToast = () => {
     }
   }
 
-  return { callDangerToast }
+  return { callSuccessToast }
 }

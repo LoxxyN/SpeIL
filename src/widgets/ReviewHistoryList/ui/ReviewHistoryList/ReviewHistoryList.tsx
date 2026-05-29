@@ -1,12 +1,12 @@
 'use client'
 
+import { ActionInfoPanel } from '@entities/index'
 import { ClearHistoryButton } from '@features/index'
 import { Separator } from '@heroui/react'
 import { baseHistoryStore, formatDateTime } from '@shared/lib'
-import { BackLink } from '@shared/ui'
+import { historyStore } from '@shared/lib/stores'
 import { observer } from 'mobx-react-lite'
 import { Fragment, useEffect } from 'react'
-import { historyStore } from '../../model'
 import { ReviewHistoryCard } from '../ReviewHistoryCard'
 import { ReviewHistoryListEmpty } from '../ReviewHistoryListEmpty'
 
@@ -20,10 +20,11 @@ export const ReviewHistoryList = observer(() => {
 
   return (
     <section className="review-history">
-      <div className="mb-10 flex items-center justify-between">
-        <BackLink href="/" title="На главную" />
-        <ClearHistoryButton onRemoveReview={historyStore.clearHistory} />
-      </div>
+      <ActionInfoPanel
+        href="/"
+        title="На главную"
+        renderButton={<ClearHistoryButton onRemoveReview={historyStore.clearHistory} />}
+      />
 
       <div className="review-list">
         {historyStore.reviewData.map((item, index) => {
