@@ -1,7 +1,10 @@
 'use client'
 
-import { baseHistoryStore } from '@shared/lib'
+import { ActionInfoPanel } from '@entities/index'
+import { RemoveReviewButton } from '@features/index'
+import { baseHistoryStore, historyStore } from '@shared/lib/stores'
 import { observer } from 'mobx-react-lite'
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { reviewStore, useDangerToast } from '../../model'
 import { ReviewPanelWrapper } from './ReviewPanelWrapper'
@@ -9,13 +12,14 @@ import { ReviewPanelWrapper } from './ReviewPanelWrapper'
 type TReviewPanel = {
   showActions: boolean
   isReadonly: boolean
-  children: React.ReactNode
+  children?: React.ReactNode
   reviewId?: string
 }
 
 export const ReviewPanel = observer(
   ({ showActions, isReadonly, children, reviewId }: TReviewPanel) => {
     const { callDangerToast } = useDangerToast()
+    const router = useRouter()
 
     useEffect(() => {
       baseHistoryStore.loadStorage()
@@ -27,6 +31,12 @@ export const ReviewPanel = observer(
 
     const setCode = (value: string) => {
       reviewStore.setCode(value)
+    }
+
+    const removeReview = () => {
+      if (typeof review === 'undefined') return
+      historyStore.removeReviewById(review.reviewId)
+      router.back()
     }
 
     const baseReviewPanelProps = {
@@ -59,7 +69,14 @@ export const ReviewPanel = observer(
     }
 
     return (
-      <ReviewPanelWrapper {...baseReviewPanelProps} code={review.code} review={review.review} />
+      <section>
+        <ActionInfoPanel
+          href="/history"
+          title="К истории"
+          renderButton={<RemoveReviewButton onRemoveReview={removeReview} />}
+        />
+        <ReviewPanelWrapper {...baseReviewPanelProps} code={review.code} review={review.review} />
+      </section>
     )
   }
 )
