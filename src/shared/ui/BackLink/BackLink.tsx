@@ -1,5 +1,5 @@
 import { ArrowLeft } from '@gravity-ui/icons'
-import Link from 'next/link'
+import { Link } from '@src/i18n/navigation'
 
 export const BackLink = ({ href, title }: { href: string; title: string }) => {
   return (

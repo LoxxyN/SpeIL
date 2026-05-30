@@ -1,0 +1,23 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "history": "History"
+  },
+  "Header": {
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "ReviewActions": {
+    "getReview": "Get review",
+    "loading": "Loading...",
+    "copy": "Copy",
+    "copied": "Copied",
+    "clear": "Clear"
+  },
+  "ReviewDetails": {
+    "notFoundTitle": "Review not found",
+    "backToHistory": "Back to history"
+  }
+}

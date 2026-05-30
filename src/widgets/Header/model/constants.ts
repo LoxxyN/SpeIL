@@ -11,17 +11,17 @@ export const DROPDOWN_ITEMS: IDropdownItems[] = [
     key: 'theme',
     label: 'Тема',
   },
-]
+] as const
 
 export const NAV_LINKS: INavLinks[] = [
   {
     id: 1,
     path: '/',
-    label: 'Главная',
+    labelKey: 'home',
   },
   {
     id: 2,
     path: '/history',
-    label: 'История',
+    labelKey: 'history',
   },
-]
+] as const

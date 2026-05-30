@@ -1,11 +1,13 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@src/i18n/navigation'
+import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 import { NAV_LINKS } from '../../model'
 
 export const Navbar = () => {
   const pathname = usePathname()
+  const t = useTranslations('Navigation')
 
   return (
     <nav className="header__nav">
@@ -16,7 +18,7 @@ export const Navbar = () => {
               className={`link text-2xl opacity-40 ${pathname === item.path ? 'opacity-100' : ''}`}
               href={item.path}
             >
-              {item.label}
+              {t(item.labelKey)}
             </Link>
           </li>
         ))}

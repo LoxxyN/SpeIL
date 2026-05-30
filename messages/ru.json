@@ -1,0 +1,23 @@
+{
+  "Navigation": {
+    "home": "Главная",
+    "history": "История"
+  },
+  "Header": {
+    "language": "Язык",
+    "theme": "Тема",
+    "dark": "Тёмная",
+    "light": "Светлая"
+  },
+  "ReviewActions": {
+    "getReview": "Получить ревью",
+    "loading": "Ожидаем...",
+    "copy": "Копировать",
+    "copied": "Скопировано",
+    "clear": "Очистить"
+  },
+  "ReviewDetails": {
+    "notFoundTitle": "Ревью не найдено",
+    "backToHistory": "Вернуться к истории"
+  }
+}

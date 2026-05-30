@@ -2,7 +2,7 @@ import { ReviewResultList } from '@entities/index'
 import { CodeEditor, RemoveReviewButton } from '@features/index'
 import { Card } from '@heroui/react'
 import type { IReviewHistoryItem } from '@shared/types'
-import Link from 'next/link'
+import { Link } from '@src/i18n/navigation'
 import type { MouseEvent } from 'react'
 import './ReviewHistoryCard.css'
 
