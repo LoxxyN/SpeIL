@@ -1,5 +1,5 @@
 import { parseNestedJSON } from '@shared/lib'
-import type { IReviewData } from '@shared/types'
+import type { IReviewData, TReviewData } from '@shared/types'
 
 export const postReview = async (code: string, locale: string): Promise<IReviewData> => {
   try {
@@ -14,7 +14,7 @@ export const postReview = async (code: string, locale: string): Promise<IReviewD
     }
 
     const { data } = await res.json()
-    const reviewData = parseNestedJSON(data)
+    const reviewData = parseNestedJSON<TReviewData>(data)
 
     return { review: reviewData }
   } catch (error) {
