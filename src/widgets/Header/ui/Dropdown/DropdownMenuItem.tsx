@@ -1,24 +1,22 @@
 import { Dropdown, Switch } from '@heroui/react'
-import type { IDropdownItems } from '../../model/types'
 
 type TDropdownMenuItem = {
-  item: IDropdownItems
+  label: string
+  activeLabel: string
   isSelected: boolean
   onChange: (value: boolean) => void
 }
 
-export const DropdownMenuItem = ({ item, isSelected, onChange }: TDropdownMenuItem) => {
-  const customLabel =
-    item.key === 'theme' ? (isSelected ? 'Темная' : 'Светлая') : isSelected ? 'EN' : 'RU'
-
+export const DropdownMenuItem = ({
+  activeLabel,
+  label,
+  isSelected,
+  onChange,
+}: TDropdownMenuItem) => {
   return (
-    <Dropdown.Item
-      shouldCloseOnSelect={false}
-      textValue={item.label}
-      className="flex justify-between"
-    >
+    <Dropdown.Item shouldCloseOnSelect={false} textValue={label} className="flex justify-between">
       <p>
-        {item.label}: {customLabel}
+        {label}: {activeLabel}
       </p>
       <div
         onPointerDown={(event) => event.stopPropagation()}
