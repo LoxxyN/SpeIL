@@ -1,23 +1,62 @@
 {
   "Navigation": {
     "home": "Главная",
-    "history": "История"
+    "history": "История",
+    "setting": "Настройки"
   },
-  "Header": {
+  "HeaderMenu": {
     "language": "Язык",
     "theme": "Тема",
     "dark": "Тёмная",
-    "light": "Светлая"
+    "light": "Светлая",
+    "en": "EN",
+    "ru": "RU"
   },
-  "ReviewActions": {
+  "ActionInfoPanel": {
+    "backToMain": "На главную",
+    "backToHistory": "К истории",
+    "buttonRemoveAll": "Очистить все",
+    "buttonRemoveReview": "Удалить"
+  },
+  "ReviewActionButtons": {
     "getReview": "Получить ревью",
     "loading": "Ожидаем...",
     "copy": "Копировать",
     "copied": "Скопировано",
-    "clear": "Очистить"
+    "clear": "Очистить поле"
   },
   "ReviewDetails": {
-    "notFoundTitle": "Ревью не найдено",
-    "backToHistory": "Вернуться к истории"
+    "notFoundTitle": "Ой, кажется такого ревью не найдено",
+    "backLink": "Вернуться к истории"
+  },
+  "ReviewHistory": {
+    "createdAt": "Создано",
+    "notFoundTitle": "Похоже тут пусто",
+    "backLink": "Хотите получить ревью?"
+  },
+  "ReviewResult": {
+    "ReviewResultEmptyTitle": "Здесь будут результаты ревью",
+    "ReviewResultTitle": "Результаты последнего ревью",
+    "whatsCheckTitle": "Что проверит агент?",
+    "checkStep1": "Критические ошибки",
+    "checkStep2": "Стилистические ошибки",
+    "checkStep3": "Мелкие ошибки",
+    "howItWorkTitle": "Вот как это работает",
+    "workStep1": "Напиши или вставь код в панель",
+    "workStep2": "Нажми 'Получить ревью'",
+    "workStep3": "Получи ревью с категориями"
+  },
+  "Toasts": {
+    "copySuccess": "Ревью успешно скопировано",
+    "getReivewFailedTitle": "Ой, что то пошло не так",
+    "getReivewFailedDescription": "Пожалуйста повторите попытку"
+  },
+  "Modals": {
+    "cancelButton": "Отмена",
+    "confirmButton": "Подтвердить",
+    "clearAllTitle": "Вы действительно хотите очистить историю?",
+    "clearAllDescription": "Это удалит историю безвозвратно! После удаления нельзя будет вернуть удаленные ревью, делайте это решение осознанно.",
+    "removeReviewTitle": "Вы действительно хотите удалить это ревью?",
+    "removeReviewDescription": "Это удалит ревью безвозвратно! Без возможности восстановления"
   }
 }

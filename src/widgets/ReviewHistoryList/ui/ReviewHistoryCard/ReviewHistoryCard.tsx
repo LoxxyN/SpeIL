@@ -3,6 +3,7 @@ import { CodeEditor, RemoveReviewButton } from '@features/index'
 import { Card } from '@heroui/react'
 import type { IReviewHistoryItem } from '@shared/types'
 import { Link } from '@src/i18n/navigation'
+import { useTranslations } from 'next-intl'
 import type { MouseEvent } from 'react'
 import './ReviewHistoryCard.css'
 
@@ -19,6 +20,7 @@ export const ReviewHistoryCard = ({
   dateTimeOfCreate,
   removeReview,
 }: IReviewHistoryCard) => {
+  const t = useTranslations('ReviewHistory')
   const stopEvent = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
   }
@@ -33,7 +35,9 @@ export const ReviewHistoryCard = ({
         <div className="review-card__content">
           <Link href={href} className="flex h-full flex-col justify-between">
             <div className="review-card__header">
-              <h2 className="review-card__header-title">Создано: {dateTimeOfCreate}</h2>
+              <h2 className="review-card__header-title">
+                {t('createdAt')}: {dateTimeOfCreate}
+              </h2>
               <RemoveReviewButton onRemoveReview={removeReview} />
             </div>
 

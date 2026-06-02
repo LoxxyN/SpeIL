@@ -1,4 +1,5 @@
 export { BackLink } from './BackLink'
+export { DeleteButton } from './DeleteButton'
+export { LinkWrapper } from './LinkWrapper'
 export { Logo } from './Logo'
 export { RatingCard } from './RatingCard'
-export { DeleteButton } from './DeleteButton'

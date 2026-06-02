@@ -6,11 +6,15 @@ import { Separator } from '@heroui/react'
 import { baseHistoryStore, formatDateTime } from '@shared/lib'
 import { historyStore } from '@shared/lib/stores'
 import { observer } from 'mobx-react-lite'
+import { useLocale, useTranslations } from 'next-intl'
 import { Fragment, useEffect } from 'react'
 import { ReviewHistoryCard } from '../ReviewHistoryCard'
 import { ReviewHistoryListEmpty } from '../ReviewHistoryListEmpty'
 
 export const ReviewHistoryList = observer(() => {
+  const t = useTranslations('ActionInfoPanel')
+  const locale = useLocale()
+
   useEffect(() => {
     baseHistoryStore.loadStorage()
   }, [])
@@ -22,7 +26,7 @@ export const ReviewHistoryList = observer(() => {
     <section className="review-history">
       <ActionInfoPanel
         href="/"
-        title="На главную"
+        title={t('backToMain')}
         renderButton={<ClearHistoryButton onRemoveReview={historyStore.clearHistory} />}
       />
 
@@ -36,7 +40,7 @@ export const ReviewHistoryList = observer(() => {
                 href={`/review/${item.reviewId}`}
                 code={item.code}
                 review={item.review}
-                dateTimeOfCreate={formatDateTime(item.createdAt)}
+                dateTimeOfCreate={formatDateTime(item.createdAt, locale)}
                 removeReview={() => historyStore.removeReviewById(item.reviewId)}
               />
               {index !== historyStore.reviewData.length - 1 && (

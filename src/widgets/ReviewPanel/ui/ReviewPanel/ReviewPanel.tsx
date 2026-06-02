@@ -1,29 +1,29 @@
 'use client'
 
 import { ActionInfoPanel } from '@entities/index'
-import { RemoveReviewButton } from '@features/index'
+import { CopyReviewButton, RemoveReviewButton } from '@features/index'
 import { baseHistoryStore, historyStore } from '@shared/lib/stores'
 import { observer } from 'mobx-react-lite'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { reviewStore, useDangerToast } from '../../model'
+import type { TReviewPanel } from '../../model/types'
 import { ReviewPanelWrapper } from './ReviewPanelWrapper'
-
-type TReviewPanel = {
-  showActions: boolean
-  isReadonly: boolean
-  children?: React.ReactNode
-  reviewId?: string
-}
 
 export const ReviewPanel = observer(
   ({ showActions, isReadonly, children, reviewId }: TReviewPanel) => {
     const { callDangerToast } = useDangerToast()
     const router = useRouter()
+    const t = useTranslations('ActionInfoPanel')
 
     useEffect(() => {
       baseHistoryStore.loadStorage()
     }, [])
+
+    if (!baseHistoryStore.isLoaded) {
+      return null
+    }
 
     const getReview = () => {
       reviewStore.postReviewAction(reviewStore.code).catch((error) => error && callDangerToast())
@@ -58,10 +58,6 @@ export const ReviewPanel = observer(
       )
     }
 
-    if (!baseHistoryStore.isLoaded) {
-      return null
-    }
-
     const review = reviewStore.getReviewById(reviewId)
 
     if (!review) {
@@ -72,8 +68,13 @@ export const ReviewPanel = observer(
       <section>
         <ActionInfoPanel
           href="/history"
-          title="К истории"
-          renderButton={<RemoveReviewButton onRemoveReview={removeReview} />}
+          title={t('backToHistory')}
+          renderButton={
+            <div className="flex gap-5">
+              <CopyReviewButton review={review.review} />
+              <RemoveReviewButton onRemoveReview={removeReview} />
+            </div>
+          }
         />
         <ReviewPanelWrapper {...baseReviewPanelProps} code={review.code} review={review.review} />
       </section>

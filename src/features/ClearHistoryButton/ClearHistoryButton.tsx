@@ -1,36 +1,35 @@
 import { AlertDialog, Button } from '@heroui/react'
 import { DeleteButton } from '@shared/ui'
+import { useTranslations } from 'next-intl'
 
 export const ClearHistoryButton = ({ onRemoveReview }: { onRemoveReview: () => void }) => {
+  const t = useTranslations('ActionInfoPanel')
+  const tModal = useTranslations('Modals')
+
   return (
     <AlertDialog>
-      <DeleteButton label="Очистить все" hasTrashIcon />
+      <DeleteButton label={t('buttonRemoveAll')} hasTrashIcon />
       <AlertDialog.Backdrop variant="blur">
         <AlertDialog.Container size="md">
           <AlertDialog.Dialog>
             <AlertDialog.CloseTrigger />
             <AlertDialog.Header>
               <AlertDialog.Icon status="danger" />
-              <AlertDialog.Heading>
-                Вы действительно <strong>хотите</strong> очистить историю?
-              </AlertDialog.Heading>
+              <AlertDialog.Heading>{tModal('clearAllTitle')}</AlertDialog.Heading>
             </AlertDialog.Header>
             <AlertDialog.Body>
-              <p>
-                Это удалит историю безвозвратно. После удаления нельзя будет вернуть удаленные
-                ревью, делайте это решение осознанно
-              </p>
+              <p>{tModal('clearAllDescription')}</p>
             </AlertDialog.Body>
             <AlertDialog.Footer>
               <Button slot="close" variant="tertiary">
-                Отмена
+                {tModal('cancelButton')}
               </Button>
               <DeleteButton
                 size="md"
                 slot="close"
                 onClick={onRemoveReview}
                 hasTrashIcon={false}
-                label="Подтвердить"
+                label={tModal('confirmButton')}
               />
             </AlertDialog.Footer>
           </AlertDialog.Dialog>

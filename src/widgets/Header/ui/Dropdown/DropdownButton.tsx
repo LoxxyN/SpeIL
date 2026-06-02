@@ -5,7 +5,7 @@ import { usePathname, useRouter } from '@/src/i18n/navigation'
 import { ChevronDown } from '@gravity-ui/icons'
 import { Button, Dropdown } from '@heroui/react'
 import { observer } from 'mobx-react-lite'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { DropdownMenuItem } from './DropdownMenuItem'
 
 export const DropdownButton = observer(() => {
@@ -13,7 +13,8 @@ export const DropdownButton = observer(() => {
   const router = useRouter()
   const pathname = usePathname()
   const { theme } = themeStore
-
+  const t = useTranslations('HeaderMenu')
+  const navigationT = useTranslations('Navigation')
   const nextLocale = locale === 'ru' ? 'en' : 'ru'
 
   const handleChangeLanguage = () => {
@@ -23,20 +24,20 @@ export const DropdownButton = observer(() => {
   return (
     <Dropdown>
       <Button aria-label="Menu" variant="outline">
-        Настройки <ChevronDown />
+        {navigationT('setting')} <ChevronDown />
       </Button>
 
       <Dropdown.Popover>
         <Dropdown.Menu>
           <DropdownMenuItem
-            label="Язык"
-            activeLabel={locale === 'ru' ? 'RU' : 'EN'}
+            label={t('language')}
+            activeLabel={locale === 'ru' ? t('ru') : t('en')}
             isSelected={locale === 'ru' ? false : true}
             onChange={handleChangeLanguage}
           />
           <DropdownMenuItem
-            label="Тема"
-            activeLabel={theme === 'dark' ? 'Темная' : 'Светлая'}
+            label={t('theme')}
+            activeLabel={theme === 'dark' ? t('dark') : t('light')}
             isSelected={theme === 'dark' ? false : true}
             onChange={() => themeStore.toggleTheme()}
           />
