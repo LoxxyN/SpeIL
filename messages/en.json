@@ -1,0 +1,62 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "history": "History",
+    "setting": "Settings"
+  },
+  "HeaderMenu": {
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "en": "EN",
+    "ru": "RU"
+  },
+  "ActionInfoPanel": {
+    "backToMain": "Back to main",
+    "backToHistory": "Back to history",
+    "buttonRemoveAll": "Clear all",
+    "buttonRemoveReview": "Delete"
+  },
+  "ReviewActionButtons": {
+    "getReview": "Get review",
+    "loading": "Waiting...",
+    "copy": "Copy",
+    "copied": "Copied",
+    "clear": "Clear field"
+  },
+  "ReviewDetails": {
+    "notFoundTitle": "Oops, it looks like this review was not found",
+    "backLink": "Return to history"
+  },
+  "ReviewHistory": {
+    "createdAt": "Created",
+    "notFoundTitle": "Looks like it's empty here",
+    "backLink": "Want to get a review?"
+  },
+  "ReviewResult": {
+    "ReviewResultEmptyTitle": "The review results will appear here",
+    "ReviewResultTitle": "Review results received",
+    "whatsCheckTitle": "What will the agent check?",
+    "checkStep1": "Critical errors",
+    "checkStep2": "Stylistic issues",
+    "checkStep3": "Minor issues",
+    "howItWorkTitle": "How it works",
+    "workStep1": "Write or paste code into the panel",
+    "workStep2": "Click 'Get review'",
+    "workStep3": "Get a review with categories"
+  },
+  "Toasts": {
+    "copySuccess": "Review successfully copied",
+    "getReivewFailedTitle": "Oops, something went wrong",
+    "getReivewFailedDescription": "Please try again"
+  },
+  "Modals": {
+    "cancelButton": "Cancel",
+    "confirmButton": "Confirm",
+    "clearAllTitle": "Do you really want to clear the history?",
+    "clearAllDescription": "This will permanently delete the history! After deleting, you will not be able to return deleted reviews, so make this decision consciously.",
+    "removeReviewTitle": "Do you really want to delete this review?",
+    "removeReviewDescription": "This will permanently delete the review! Without the possibility of recovery."
+  }
+}

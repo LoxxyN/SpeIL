@@ -7,5 +7,5 @@ export interface IDropdownItems {
 export interface INavLinks {
   id: number
   path: string
-  label: string
+  labelKey: string
 }

@@ -1,11 +1,16 @@
 import { ArrowLeft } from '@gravity-ui/icons'
-import Link from 'next/link'
+import { LinkWrapper } from '../LinkWrapper'
 
-export const BackLink = ({ href, title }: { href: string; title: string }) => {
+interface IBackLink {
+  href: string
+  title: string
+}
+
+export const BackLink = ({ href, title }: IBackLink) => {
   return (
-    <Link href={href} className="flex items-center gap-2">
+    <LinkWrapper href={href} className="flex items-center gap-2">
       <ArrowLeft className="h-6 w-6" />
-      <span className="text-2xl font-semibold">{title}</span>
-    </Link>
+      <span className="text-2xl font-medium">{title}</span>
+    </LinkWrapper>
   )
 }

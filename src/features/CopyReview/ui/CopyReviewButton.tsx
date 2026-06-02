@@ -1,10 +1,12 @@
 import type { IReviewData } from '@/src/shared/types'
 import { ChevronDown, CurlyBrackets, LogoMarkdown } from '@gravity-ui/icons'
 import { Button, Dropdown, Label } from '@heroui/react'
+import { useTranslations } from 'next-intl'
 import { useCopyReview } from '../../CopyReview/model'
 
 export const CopyReviewButton = ({ review }: IReviewData) => {
   const { copyInJson, copyInMarkdown } = useCopyReview({ review })
+  const t = useTranslations('ReviewActionButtons')
 
   const handleAction = (key: React.Key) => {
     if (key === 'json') copyInJson()
@@ -13,9 +15,9 @@ export const CopyReviewButton = ({ review }: IReviewData) => {
 
   return (
     <Dropdown>
-      <Button variant="tertiary" size="lg">
+      <Button variant="tertiary" size="md">
         <span className="flex items-center gap-2">
-          Копировать в
+          {t('copy')}
           <ChevronDown className="size-5" />
         </span>
       </Button>
