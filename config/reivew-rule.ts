@@ -1,4 +1,11 @@
-export const RULE = `---
+import type { TLocale } from '@shared/types'
+
+const languageMap: Record<TLocale, string> = {
+  ru: 'Russian',
+  en: 'English',
+}
+
+export const getReivewRule = (locale: TLocale = 'ru') => `---
 name: code-reviewer
 description: >-
 Performs thorough code reviews with constructive, actionable feedback on
@@ -64,4 +71,6 @@ type ReviewType = 'danger' (Bad) | 'warning' (Suggestion) | 'default' (Nit)
     },
 
 Do not consider tabs in comparison with spaces or other purely cosmetic options as the focus of the review, this does not impair readability.
+Always respond in ${languageMap[locale]}.
+Return descriptions in ${languageMap[locale]}.
 `

@@ -1,6 +1,9 @@
-import { RULE } from '@/config/reivew-rule'
+import { getReivewRule } from '@/config/reivew-rule'
 import { GoogleGenAI } from '@google/genai'
+import type { TLocale } from '@shared/types'
 import { type NextRequest, NextResponse } from 'next/server'
+
+const isLocale = (value: unknown): value is TLocale => value === 'ru' || value === 'en'
 
 const ai = new GoogleGenAI({
   apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
@@ -8,13 +11,14 @@ const ai = new GoogleGenAI({
 
 export async function POST(req: NextRequest) {
   try {
-    const { code } = await req.json()
+    const { code, locale } = await req.json()
+    const reviewLocale = isLocale(locale) ? locale : 'ru'
     if (code === '') {
       console.error('Было передано пустое значение')
       throw new Error('Было передано пустое значение')
     }
 
-    const systemInstruction = RULE
+    const systemInstruction = getReivewRule(reviewLocale)
 
     const response = await ai.models.generateContent({
       model: 'gemini-3.1-flash-lite',
