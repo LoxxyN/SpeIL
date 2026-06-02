@@ -1,17 +1,22 @@
-export const parseNestedJSON = (obj) => {
-  if (typeof obj === 'string') {
+export const parseNestedJSON = <T = unknown>(value: unknown): T => {
+  if (typeof value === 'string') {
     try {
-      return JSON.parse(obj)
-    } catch (e) {
-      console.error(e)
+      return parseNestedJSON<T>(JSON.parse(value) as unknown)
+    } catch (error) {
+      console.error(error)
+      return value as T
     }
   }
 
-  if (typeof obj === 'object' && obj !== null) {
-    for (const key in obj) {
-      obj[key] = parseNestedJSON(obj[key])
-    }
+  if (Array.isArray(value)) {
+    return value.map((item) => parseNestedJSON(item)) as T
   }
 
-  return obj
+  if (typeof value === 'object' && value !== null) {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, nestedValue]) => [key, parseNestedJSON(nestedValue)])
+    ) as T
+  }
+
+  return value as T
 }

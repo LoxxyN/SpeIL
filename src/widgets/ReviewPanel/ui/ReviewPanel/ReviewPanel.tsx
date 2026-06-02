@@ -4,7 +4,7 @@ import { ActionInfoPanel } from '@entities/index'
 import { CopyReviewButton, RemoveReviewButton } from '@features/index'
 import { baseHistoryStore, historyStore } from '@shared/lib/stores'
 import { observer } from 'mobx-react-lite'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { reviewStore, useDangerToast } from '../../model'
@@ -14,8 +14,9 @@ import { ReviewPanelWrapper } from './ReviewPanelWrapper'
 export const ReviewPanel = observer(
   ({ showActions, isReadonly, children, reviewId }: TReviewPanel) => {
     const { callDangerToast } = useDangerToast()
-    const router = useRouter()
     const t = useTranslations('ActionInfoPanel')
+    const router = useRouter()
+    const locale = useLocale()
 
     useEffect(() => {
       baseHistoryStore.loadStorage()
@@ -26,7 +27,9 @@ export const ReviewPanel = observer(
     }
 
     const getReview = () => {
-      reviewStore.postReviewAction(reviewStore.code).catch((error) => error && callDangerToast())
+      reviewStore
+        .postReviewAction(reviewStore.code, locale)
+        .catch((error) => error && callDangerToast())
     }
 
     const setCode = (value: string) => {

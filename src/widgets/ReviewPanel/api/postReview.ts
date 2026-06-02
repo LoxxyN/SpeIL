@@ -1,12 +1,12 @@
 import { parseNestedJSON } from '@shared/lib'
-import type { IReviewData } from '@shared/types'
+import type { IReviewData, TReviewData } from '@shared/types'
 
-export const postReview = async (code: string): Promise<IReviewData> => {
+export const postReview = async (code: string, locale: string): Promise<IReviewData> => {
   try {
-    const res = await fetch('http://localhost:3000/api/review', {
+    const res = await fetch('/api/review', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code: code }),
+      body: JSON.stringify({ code, locale }),
     })
 
     if (!res.ok) {
@@ -14,7 +14,7 @@ export const postReview = async (code: string): Promise<IReviewData> => {
     }
 
     const { data } = await res.json()
-    const reviewData = parseNestedJSON(data)
+    const reviewData = parseNestedJSON<TReviewData>(data)
 
     return { review: reviewData }
   } catch (error) {

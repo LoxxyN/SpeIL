@@ -25,10 +25,10 @@ export const reviewStore = makeAutoObservable(
       return baseHistoryStore.reviewDataHistory
     },
 
-    async postReviewAction(code: string) {
+    async postReviewAction(code: string, locale: string) {
       try {
         this.isLoading = true
-        const newReview = await postReview(code)
+        const newReview = await postReview(code, locale)
 
         runInAction(() => {
           this.reviewCode = code
