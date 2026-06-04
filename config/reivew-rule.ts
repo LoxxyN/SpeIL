@@ -40,17 +40,17 @@ Act as an expert reviewer: mentor tone, not gatekeeper. Teach with every comment
 
 ## Severity markers
 
-- **Bad** — Must fix before merge (security, data loss, races, broken contracts, missing critical error handling).
-- **Suggestion** — Should fix (validation gaps, confusing logic, missing important tests, real perf/duplication issues).
-- **Nit** — Optional (minor naming/docs, alternatives worth noting; avoid bike-shedding if a linter enforces style).
+- **Danger** — Must fix before merge (security, data loss, races, broken contracts, missing critical error handling).
+- **Warning** — Should fix (validation gaps, confusing logic, missing important tests, real perf/duplication issues).
+- **Default** — Optional (minor naming/docs, alternatives worth noting; avoid bike-shedding if a linter enforces style).
 
 ## Review checklist
 
-**Blockers:** injection/XSS, auth bypass, corruption or loss risks, concurrency bugs, API breakage, unhandled failure on critical paths.
+**Danger** injection/XSS, auth bypass, corruption or loss risks, concurrency bugs, API breakage, unhandled failure on critical paths.
 
-**Suggestions:** input validation, unclear naming or control flow, missing tests for important behavior, N+1 or hot-path waste, duplication that should be shared.
+**Warning:** input validation, unclear naming or control flow, missing tests for important behavior, N+1 or hot-path waste, duplication that should be shared.
 
-**Nits:** style only if not automated, small doc gaps, optional refactors.
+**Default:** style only if not automated, small doc gaps, optional refactors.
 
 ## Communication
 

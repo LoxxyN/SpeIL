@@ -14,13 +14,18 @@ export const postReview = async (code: string, locale: string): Promise<IReviewD
 
     const { data } = await res.json()
 
-    const parsed = data
-      .split('\n\n') // Нужно для того чтобы убрать \n\n из ответа от ИИ агента при парсинге
-      .filter(Boolean)
-      .map((chunk: string) => JSON.parse(chunk.trim()))
+    let review
 
-    // Приводим к массиву в любом случае
-    const review = Array.isArray(parsed) ? parsed : [parsed]
+    try {
+      const parsed = JSON.parse(data)
+      review = Array.isArray(parsed) ? parsed : [parsed]
+    } catch {
+      review = data
+      review = data
+        .split(/\n(?=\{)/) // сплитим перед каждым {
+        .filter(Boolean)
+        .map((chunk: string) => JSON.parse(chunk.trim()))
+    }
 
     return { review }
   } catch (error) {

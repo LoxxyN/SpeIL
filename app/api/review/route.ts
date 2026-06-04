@@ -70,7 +70,12 @@ export async function POST(req: NextRequest) {
     })
 
     const reviewText = response.choices[0]?.message?.content
-    console.warn('reviewText:', reviewText)
+    console.warn(
+      'reviewText:',
+      reviewText,
+      'response.choices[0]?.message: ',
+      response.choices[0]?.message
+    )
 
     return NextResponse.json({
       data: reviewText,
