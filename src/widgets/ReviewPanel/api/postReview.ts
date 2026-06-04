@@ -1,5 +1,4 @@
-import { parseNestedJSON } from '@shared/lib'
-import type { IReviewData, TReviewData } from '@shared/types'
+import type { IReviewData } from '@shared/types'
 
 export const postReview = async (code: string, locale: string): Promise<IReviewData> => {
   try {
@@ -14,9 +13,16 @@ export const postReview = async (code: string, locale: string): Promise<IReviewD
     }
 
     const { data } = await res.json()
-    const reviewData = parseNestedJSON<TReviewData>(data)
 
-    return { review: reviewData }
+    const parsed = data
+      .split('\n\n') // Нужно для того чтобы убрать \n\n из ответа от ИИ агента при парсинге
+      .filter(Boolean)
+      .map((chunk: string) => JSON.parse(chunk.trim()))
+
+    // Приводим к массиву в любом случае
+    const review = Array.isArray(parsed) ? parsed : [parsed]
+
+    return { review }
   } catch (error) {
     throw new Error(`postReview api error: ${error}`)
   }

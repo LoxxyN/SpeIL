@@ -1,7 +1,8 @@
 import { getReivewRule } from '@/config/reivew-rule'
-import { GoogleGenAI } from '@google/genai'
 import type { TLocale } from '@shared/types'
+import GigaChat from 'gigachat'
 import { type NextRequest, NextResponse } from 'next/server'
+import { Agent } from 'node:https'
 
 const isLocale = (value: unknown): value is TLocale => value === 'ru' || value === 'en'
 
@@ -32,8 +33,16 @@ Review only the code between ${USER_CODE_OPEN_TAG} and ${USER_CODE_CLOSE_TAG}.
 `
 }
 
-const ai = new GoogleGenAI({
-  apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
+const httpsAgent = new Agent({
+  rejectUnauthorized: false,
+})
+
+const client = new GigaChat({
+  credentials: process.env.GIGACHAT_AUTH_KEY,
+  scope: 'GIGACHAT_API_PERS',
+  model: 'GigaChat',
+  httpsAgent: httpsAgent,
+  timeout: 60000,
 })
 
 export async function POST(req: NextRequest) {
@@ -47,16 +56,24 @@ export async function POST(req: NextRequest) {
 
     const systemInstruction = getReivewRule(reviewLocale)
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.1-flash-lite',
-      contents: createReviewPrompt(code),
-      config: {
-        systemInstruction: systemInstruction,
-      },
+    const response = await client.chat({
+      messages: [
+        {
+          role: 'system',
+          content: systemInstruction,
+        },
+        {
+          role: 'user',
+          content: createReviewPrompt(code),
+        },
+      ],
     })
 
+    const reviewText = response.choices[0]?.message?.content
+    console.warn('reviewText:', reviewText)
+
     return NextResponse.json({
-      data: response.text,
+      data: reviewText,
     })
   } catch (error) {
     console.error('Error:', error)
