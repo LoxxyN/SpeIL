@@ -19,7 +19,7 @@ export const Footer = () => {
           <p>
             Powered by{' '}
             <a
-              href="https://aistudio.google.com/welcome?ref=humai.blog"
+              href="https://developers.sber.ru/docs/ru/gigachat/guides/main"
               className="footer__social-link"
               target="_blank"
             >
