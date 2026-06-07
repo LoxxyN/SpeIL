@@ -23,7 +23,7 @@ export const Footer = () => {
               className="footer__social-link"
               target="_blank"
             >
-              Gemini API
+              GigaChat API
             </a>
           </p>
         </div>
