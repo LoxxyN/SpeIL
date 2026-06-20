@@ -1,11 +1,5 @@
 import { Dropdown, Switch } from '@heroui/react'
-
-type TDropdownMenuItem = {
-  label: string
-  activeLabel: string
-  isSelected: boolean
-  onChange: (value: boolean) => void
-}
+import type { TDropdownMenuItem } from '../../model'
 
 export const DropdownMenuItem = ({
   activeLabel,

@@ -1,6 +1,6 @@
-import type { IReviewData } from '@/src/shared/types'
 import { ChevronDown, CurlyBrackets, LogoMarkdown } from '@gravity-ui/icons'
 import { Button, Dropdown, Label } from '@heroui/react'
+import type { IReviewData } from '@shared/types'
 import { useTranslations } from 'next-intl'
 import { useCopyReview } from '../../CopyReview/model'
 

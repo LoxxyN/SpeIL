@@ -1,9 +1,9 @@
 'use client'
 
-import { themeStore } from '@/app/store'
-import { usePathname, useRouter } from '@/src/i18n/navigation'
+import { themeStore } from '@app/store'
 import { ChevronDown } from '@gravity-ui/icons'
 import { Button, Dropdown } from '@heroui/react'
+import { usePathname, useRouter } from '@i18n/navigation'
 import { observer } from 'mobx-react-lite'
 import { useLocale, useTranslations } from 'next-intl'
 import { DropdownMenuItem } from './DropdownMenuItem'

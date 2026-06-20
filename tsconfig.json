@@ -22,6 +22,7 @@
       "@/*": ["./*"],
       "@app/*": ["./app/*"],
       "@config/*": ["./config/*"],
+      "@i18n/*": ["./src/i18n/*"],
       "@src/*": ["./src/*"],
       "@shared/*": ["./src/shared/*"],
       "@entities/*": ["./src/entities/*"],

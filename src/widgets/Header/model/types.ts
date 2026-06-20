@@ -9,3 +9,10 @@ export interface INavLinks {
   path: string
   labelKey: string
 }
+
+export type TDropdownMenuItem = {
+  label: string
+  activeLabel: string
+  isSelected: boolean
+  onChange: (value: boolean) => void
+}

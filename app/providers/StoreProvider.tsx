@@ -1,12 +1,12 @@
 'use client'
 
-import { themeStore } from '@/app/store'
+import { themeStore } from '@app/store'
+import type { TTheme } from '@shared/types'
 import { useEffect } from 'react'
 
-type Theme = 'dark' | 'light'
 type ProviderProps = {
   children: React.ReactNode
-  initialTheme: Theme
+  initialTheme: TTheme
 }
 
 export const StoreProvider = ({ children, initialTheme }: ProviderProps) => {

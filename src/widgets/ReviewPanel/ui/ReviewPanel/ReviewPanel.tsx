@@ -12,7 +12,7 @@ import type { TReviewPanel } from '../../model/types'
 import { ReviewPanelWrapper } from './ReviewPanelWrapper'
 
 export const ReviewPanel = observer(
-  ({ showActions, isReadonly, children, reviewId }: TReviewPanel) => {
+  ({ showActions, isReadonly, notFoundSlot, reviewId }: TReviewPanel) => {
     const { callDangerToast } = useDangerToast()
     const t = useTranslations('ActionInfoPanel')
     const router = useRouter()
@@ -64,7 +64,7 @@ export const ReviewPanel = observer(
     const review = reviewStore.getReviewById(reviewId)
 
     if (!review) {
-      return children
+      return notFoundSlot || null
     }
 
     return (

@@ -1,10 +1,5 @@
 import { ClearEditor, GetReviewButton } from '@features/index'
-
-export type TEditorActionButtons = {
-  handleClear: () => void
-  handleGetReview: () => void
-  isLoading: boolean
-}
+import type { TEditorActionButtons } from '../../../model'
 
 export const EditorActionButtons = ({
   handleClear,

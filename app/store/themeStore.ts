@@ -1,17 +1,16 @@
 'use client'
 
+import type { TTheme } from '@shared/types'
 import { makeAutoObservable } from 'mobx'
 
-type Theme = 'light' | 'dark'
-
 class ThemeStore {
-  theme: Theme = 'light'
+  theme: TTheme = 'light'
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  hydrate(theme: Theme) {
+  hydrate(theme: TTheme) {
     if (typeof window === 'undefined') return
 
     this.theme = theme
@@ -21,7 +20,7 @@ class ThemeStore {
     this.setTheme(this.theme === 'light' ? 'dark' : 'light')
   }
 
-  setTheme(theme: Theme) {
+  setTheme(theme: TTheme) {
     this.theme = theme
 
     document.documentElement.dataset.theme = theme

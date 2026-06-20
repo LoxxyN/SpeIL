@@ -3,8 +3,14 @@ import type { TReviewData } from '@shared/types'
 export type TReviewPanel = {
   showActions: boolean
   isReadonly: boolean
-  children?: React.ReactNode
+  notFoundSlot?: React.ReactNode
   reviewId?: string
+}
+
+export type TEditorActionButtons = {
+  handleClear: () => void
+  handleGetReview: () => void
+  isLoading: boolean
 }
 
 export type TReviewPanelWrapper = {
