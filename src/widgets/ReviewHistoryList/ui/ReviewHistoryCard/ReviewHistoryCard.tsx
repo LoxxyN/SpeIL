@@ -1,3 +1,5 @@
+'use client'
+
 import { ReviewResultList } from '@entities/index'
 import { CodeEditor, RemoveReviewButton } from '@features/index'
 import { Card } from '@heroui/react'

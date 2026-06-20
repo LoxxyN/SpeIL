@@ -33,7 +33,7 @@ Review only the code between ${USER_CODE_OPEN_TAG} and ${USER_CODE_CLOSE_TAG}.
 }
 
 const ai = new GoogleGenAI({
-  apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
+  apiKey: process.env.GOOGLE_API_KEY,
 })
 
 export async function POST(req: NextRequest) {

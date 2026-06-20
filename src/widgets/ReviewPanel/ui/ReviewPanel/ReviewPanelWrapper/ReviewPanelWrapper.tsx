@@ -1,4 +1,4 @@
-import { ReviewResult } from '@entities/index'
+import { ReviewResult, ReviewResultEmpty } from '@entities/index'
 import { CodeEditor, CopyCodeButton } from '@features/index'
 import type { TReviewPanelWrapper } from '../../../model'
 import { EditorActionButtons } from '../EditorActionButtons'
@@ -47,7 +47,7 @@ export const ReviewPanelWrapper = ({
         </div>
         {renderActionButtons()}
       </div>
-      <ReviewResult review={review} isLoading={isLoading} />
+      <ReviewResult review={review} isLoading={isLoading} emptyResultSlot={<ReviewResultEmpty />} />
     </section>
   )
 }
