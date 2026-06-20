@@ -1,2 +1,1 @@
-import ReviewResult from './ReviewResult'
-export { ReviewResult }
+export { ReviewResult } from './ReviewResult'

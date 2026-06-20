@@ -4,14 +4,13 @@ import { Spinner } from '@heroui/react'
 import type { TReviewData } from '@shared/types'
 import { observer } from 'mobx-react-lite'
 import { useTranslations } from 'next-intl'
-import { memo } from 'react'
 import { ReviewResultEmpty } from '../ReviewResultEmpty'
 import { ReviewResultList } from '../ReviewResultList'
 import './ReviewResult.css'
 
 type TReviewResult = { review: TReviewData; isLoading: boolean }
 
-const ReviewResult = observer(({ review, isLoading }: TReviewResult) => {
+export const ReviewResult = observer(({ review, isLoading }: TReviewResult) => {
   const t = useTranslations('ReviewResult')
 
   if (!review) return <ReviewResultEmpty />
@@ -23,5 +22,3 @@ const ReviewResult = observer(({ review, isLoading }: TReviewResult) => {
     </div>
   )
 })
-
-export default memo(ReviewResult)

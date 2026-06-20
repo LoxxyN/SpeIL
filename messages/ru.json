@@ -47,7 +47,8 @@
     "workStep3": "Получи ревью с категориями"
   },
   "Toasts": {
-    "copySuccess": "Ревью успешно скопировано",
+    "copySuccessTitle": "Успешно скопировано",
+    "copySuccessDescription": "Ревью успешно скопировано",
     "getReivewFailedTitle": "Ой, что то пошло не так",
     "getReivewFailedDescription": "Пожалуйста повторите попытку"
   },

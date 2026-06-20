@@ -1,4 +1,4 @@
-import { getReivewRule } from '@/config/reivew-rule'
+import { getReivewRule } from '@config/reivew-rule'
 import { GoogleGenAI } from '@google/genai'
 import type { TLocale } from '@shared/types'
 import { type NextRequest, NextResponse } from 'next/server'

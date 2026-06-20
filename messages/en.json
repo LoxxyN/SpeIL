@@ -47,7 +47,8 @@
     "workStep3": "Get a review with categories"
   },
   "Toasts": {
-    "copySuccess": "Review successfully copied",
+    "copySuccessTitle": "Success copied",
+    "copySuccessDescription": "Review was successfully copied",
     "getReivewFailedTitle": "Oops, something went wrong",
     "getReivewFailedDescription": "Please try again"
   },

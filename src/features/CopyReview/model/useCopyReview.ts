@@ -1,23 +1,25 @@
 'use client'
 
+import { useToast } from '@shared/lib/hooks'
 import type { IReviewData } from '@shared/types'
 import { useCallback, useState } from 'react'
-import { useSuccessToast } from './useSuccessToast'
 
 export const useCopyReview = ({ review }: IReviewData) => {
   const [isCopying, setIsCopying] = useState(false)
-  const { callSuccessToast } = useSuccessToast()
+  const { callToast } = useToast()
 
   const copyToClipboard = useCallback(
     async (value: string) => {
       setIsCopying(true)
-      await navigator.clipboard.writeText(value).then(() => callSuccessToast())
+      await navigator.clipboard
+        .writeText(value)
+        .then(() => callToast('success', 'copySuccessTitle', 'copySuccessDescription'))
 
       setTimeout(() => {
         setIsCopying(false)
       }, 1500)
     },
-    [callSuccessToast]
+    [callToast]
   )
 
   const copyInJson = useCallback(async () => {
