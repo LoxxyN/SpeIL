@@ -1,8 +1,8 @@
 'use client'
 
+import { usePathname } from '@i18n/navigation'
 import { LinkWrapper } from '@shared/ui'
 import { useTranslations } from 'next-intl'
-import { usePathname } from 'next/navigation'
 import { NAV_LINKS } from '../../model'
 
 export const Navbar = () => {

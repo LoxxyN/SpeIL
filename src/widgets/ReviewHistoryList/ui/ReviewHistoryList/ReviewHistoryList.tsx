@@ -2,7 +2,7 @@
 
 import { ActionInfoPanel } from '@entities/index'
 import { ClearHistoryButton } from '@features/index'
-import { Separator } from '@heroui/react'
+import { Separator, Spinner } from '@heroui/react'
 import { formatDateTime } from '@shared/lib'
 import { baseHistoryStore, historyStore } from '@shared/lib/stores'
 import { observer } from 'mobx-react-lite'
@@ -19,8 +19,13 @@ export const ReviewHistoryList = observer(() => {
     baseHistoryStore.loadStorage()
   }, [])
 
-  if (!baseHistoryStore.isLoaded || baseHistoryStore.reviewDataHistory.length <= 0)
-    return <ReviewHistoryListEmpty />
+  if (!baseHistoryStore.isLoaded)
+    return (
+      <div className="flex size-full items-center justify-center">
+        <Spinner className="size-12" />
+      </div>
+    )
+  if (baseHistoryStore.reviewDataHistory.length <= 0) return <ReviewHistoryListEmpty />
 
   return (
     <section className="review-history">
